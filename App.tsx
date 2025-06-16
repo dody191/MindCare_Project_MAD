@@ -1,118 +1,77 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
   View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+//Komponen adalah fungsi yg mengembalikan JSX
+const App = () => {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+    //JSX
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={style.container}>
+        <Text style={style.text}>Basic React Native</Text>
+      </View>
+      <Image style={style.img1} source={require('./assets/dodylaongky.jpg')} />
+      <Image
+        style={style.img1}
+        source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+      <Image
+        style={style.img1}
+        source={{
+          uri: 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+        }}
+      />
+      <View>
+        <TextInput style={style.input} placeholder="Masukan nama anda" />
+        <TextInput style={style.input} placeholder="Masukan nama anda" />
+        <TextInput style={style.input} placeholder="Masukan nama anda" />
+      </View>
+      <TouchableOpacity style={style.button} activeOpacity={0.5}>
+        <Text style={style.buttonText}>Submit</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+};
 
 export default App;
+
+const style = StyleSheet.create({
+  container: {
+    backgroundColor: 'red',
+  },
+  text: {
+    fontSize: 30,
+    textAlign: 'center',
+    color: 'yellow',
+  },
+  img1: {
+    height: 200,
+    width: 150,
+  },
+  input: {
+    borderWidth: 2,
+    borderColor: '#000000',
+    fontSize: 20,
+    margin: 20,
+    padding: 30,
+    borderRadius: 10,
+  },
+  button: {
+    backgroundColor: 'blue',
+    paddingVertical: 30,
+    borderRadius: 20,
+    margin: 20,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontSize: 25,
+  },
+});
