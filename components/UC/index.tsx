@@ -43,6 +43,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   email: {
-    color: 'black',
+    color: 'gray',
   },
 });
