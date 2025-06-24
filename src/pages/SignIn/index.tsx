@@ -106,7 +106,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
               </TouchableOpacity>
             </View>
             <Text style={styles.label}>Email</Text>
-            <View style={[styles.inputContainer, {borderColor: '#5A7DFF', borderRadius: 20}]}>
+            <View style={styles.inputContainer}>
               <Input
                 placeholder="Masukkan email Anda"
                 placeholderTextColor="#737B86"
@@ -134,7 +134,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
       </View>
       <View>
         <Text style={styles.label}>Email</Text>
-        <View style={[styles.inputContainer, {borderColor: '#5A7DFF', borderRadius: 20}]}>
+        <View style={styles.inputContainer}>
           <Input
             placeholder="Masukkan email Anda"
             placeholderTextColor="#737B86"
