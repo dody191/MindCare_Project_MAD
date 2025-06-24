@@ -83,13 +83,24 @@ const HeartIcon = () => (
 const SignIn = ({navigation}: {navigation: any}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
+  const handleSendResetLink = () => {
+    setShowSuccess(true);
+    setTimeout(() => setShowSuccess(false), 2000);
+  };
+
   return (
     <View style={styles.page}>
+      {showSuccess && (
+        <View style={styles.successContainer}>
+          <Text style={styles.successText}>Link Berhasil di kirim!</Text>
+        </View>
+      )}
       <Modal
         animationType="fade"
         transparent={true}
@@ -120,6 +131,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
               text="Kirim Link Reset"
               color="#535BE9"
               buttonColor="white"
+              onPress={handleSendResetLink}
             />
           </View>
         </View>
@@ -287,5 +299,20 @@ const styles = StyleSheet.create({
     color: '#535BE9',
     fontSize: 12,
     fontFamily: 'Poppins-SemiBold',
+  },
+  successContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  successText: {
+    color: 'white',
+    fontSize: 18,
+    fontFamily: 'Poppins-Bold',
   },
 });
