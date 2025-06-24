@@ -95,12 +95,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
   };
 
   return (
-    <View style={styles.page}>
-      {showSuccess && (
-        <View style={styles.successContainer}>
-          <Text style={styles.successText}>Link Berhasil di kirim!</Text>
-        </View>
-      )}
+    <>
       <Modal
         animationType="fade"
         transparent={true}
@@ -109,6 +104,11 @@ const SignIn = ({navigation}: {navigation: any}) => {
           setModalVisible(!modalVisible);
         }}>
         <View style={styles.modalOverlay}>
+          {showSuccess && (
+            <View style={styles.successContainer} pointerEvents="box-none">
+              <Text style={styles.successText}>Link Berhasil di kirim!</Text>
+            </View>
+          )}
           <View style={styles.modalView}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Lupa Password</Text>
@@ -137,50 +137,52 @@ const SignIn = ({navigation}: {navigation: any}) => {
         </View>
       </Modal>
 
-      <View style={styles.logoContainer}>
-        <View style={styles.logo}>
-          <HeartIcon />
+      <View style={styles.page}>
+        <View style={styles.logoContainer}>
+          <View style={styles.logo}>
+            <HeartIcon />
+          </View>
+          <Text style={styles.title}>MindCare</Text>
+          <Text style={styles.subtitle}>Masuk ke akun anda</Text>
         </View>
-        <Text style={styles.title}>MindCare</Text>
-        <Text style={styles.subtitle}>Masuk ke akun anda</Text>
-      </View>
-      <View>
-        <Text style={styles.label}>Email</Text>
-        <View style={styles.inputContainer}>
-          <Input
-            placeholder="Masukkan email Anda"
-            placeholderTextColor="#737B86"
-            style={styles.input}
-          />
+        <View>
+          <Text style={styles.label}>Email</Text>
+          <View style={styles.inputContainer}>
+            <Input
+              placeholder="Masukkan email Anda"
+              placeholderTextColor="#737B86"
+              style={styles.input}
+            />
+          </View>
         </View>
-      </View>
-      <View style={{height: 24}} />
-      <View>
-        <Text style={styles.label}>Password</Text>
-        <View style={styles.inputContainer}>
-          <Input
-            placeholder="Masukkan password Anda"
-            placeholderTextColor="#737B86"
-            style={styles.input}
-            secureTextEntry={!isPasswordVisible}
-          />
-          <TouchableOpacity onPress={togglePasswordVisibility}>
-            {isPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
+        <View style={{height: 24}} />
+        <View>
+          <Text style={styles.label}>Password</Text>
+          <View style={styles.inputContainer}>
+            <Input
+              placeholder="Masukkan password Anda"
+              placeholderTextColor="#737B86"
+              style={styles.input}
+              secureTextEntry={!isPasswordVisible}
+            />
+            <TouchableOpacity onPress={togglePasswordVisibility}>
+              {isPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <Text style={styles.forgot}>Lupa password?</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <Text style={styles.forgot}>Lupa password?</Text>
-        </TouchableOpacity>
+        <View style={{height: 24}} />
+        <Button text="Masuk" color="#535BE9" buttonColor="white" onPress={() => navigation.navigate('Dashboard')} />
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Belum punya akun? </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+            <Text style={styles.footerLink}>Daftar sekarang</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={{height: 24}} />
-      <Button text="Masuk" color="#535BE9" buttonColor="white" />
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>Belum punya akun? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-          <Text style={styles.footerLink}>Daftar sekarang</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </>
   );
 };
 
@@ -302,17 +304,28 @@ const styles = StyleSheet.create({
   },
   successContainer: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'center',
+    top: 32,
+    left: 20,
+    right: 20,
+    zIndex: 999,
+    backgroundColor: '#F0FDF4',
+    borderColor: '#BBF7D0',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 2,
   },
   successText: {
-    color: 'white',
-    fontSize: 18,
-    fontFamily: 'Poppins-Bold',
+    color: '#15803D',
+    fontSize: 15,
+    fontFamily: 'Poppins-Regular',
+    textAlign: 'center',
+    fontWeight: '500',
   },
 });
