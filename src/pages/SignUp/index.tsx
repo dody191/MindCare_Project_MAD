@@ -1,153 +1,96 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  TextInput as Input,
-} from 'react-native';
-import {Svg, Path} from 'react-native-svg';
-import Button from '../../components/atoms/Button';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
+import MindCare from '../../assets/mindcare.png';
+import { ArrowBack } from '../../assets';
 
-const BackIcon = () => (
-  <Svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <Path
-      d="M15 19l-7-7 7-7"
-      stroke="#000"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </Svg>
+const EyeIcon = ({visible}: {visible: boolean}) => (
+  <Image
+    source={require('../../assets/eye.png')}
+    style={{width: 17, height: 17, tintColor: '#737B86'}}
+  />
 );
 
-const EyeIcon = () => (
-  <Svg width="17" height="17" viewBox="0 0 24 24" fill="none">
-    <Path
-      d="M15.58,12c0,1.98-1.6,3.58-3.58,3.58S8.42,13.98,8.42,12,10.02,8.42,12,8.42,15.58,10.02,15.58,12Z"
-      stroke="#737B86"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <Path
-      d="M12,20.27c-5.3,0-9.27-3.93-9.27-3.93A5.06,5.06,0,0,1,2.73,12a5.06,5.06,0,0,1,0-4.34S6.7,3.73,12,3.73s9.27,3.93,9.27,3.93a5.06,5.06,0,0,1,0,4.34S17.3,20.27,12,20.27Z"
-      stroke="#737B86"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </Svg>
-);
-
-const EyeOffIcon = () => (
-  <Svg width="17" height="17" viewBox="0 0 24 24" fill="none">
-    <Path
-      d="M17.94,17.94A9.99,9.99,0,0,1,12,20.27c-5.3,0-9.27-3.93-9.27-3.93a5.06,5.06,0,0,1,1.11-2.43"
-      stroke="#737B86"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-    <Path
-      d="M12,8.42a3.58,3.58,0,0,1,3.58,3.58,3.56,3.56,0,0,1-.1,0.7"
-      stroke="#737B86"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-    <Path
-      d="M21.27,16.34s-4-3.93-9.27-3.93a9.8,9.8,0,0,0-2.3.26"
-      stroke="#737B86"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-    <Path
-      d="M2.73,3.73,21.27,22.27"
-      stroke="#737B86"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-  </Svg>
-);
-
-const HeartIcon = () => (
-  <Svg width="32" height="32" viewBox="0 0 24 24" fill="#535BE9">
-    <Path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-  </Svg>
-);
-
-const SignUp = ({navigation}: {navigation: any}) => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
+const SignUp = ({navigation}) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
-    <View style={styles.page}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}>
-        <BackIcon />
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <ArrowBack width={23} height={34} />
       </TouchableOpacity>
-      <View style={styles.logoContainer}>
-        <View style={styles.logo}>
-          <HeartIcon />
-        </View>
-        <Text style={styles.title}>MindCare</Text>
-        <Text style={styles.subtitle}>Buat akun baru</Text>
+      <View style={styles.logoWrapper}>
+        <Image source={MindCare} style={styles.logo} />
       </View>
-
-      <Text style={styles.label}>Nama Lengkap</Text>
-      <View style={styles.inputContainer}>
-        <Input
-          placeholder="Masukkan nama lengkap Anda"
-          placeholderTextColor="rgba(0, 0, 0, 0.7)"
-          style={styles.input}
-        />
-      </View>
-      <View style={{height: 16}} />
-
-      <Text style={styles.label}>Email</Text>
-      <View style={styles.inputContainer}>
-        <Input
-          placeholder="Masukkan email Anda"
-          placeholderTextColor="rgba(0, 0, 0, 0.7)"
-          style={styles.input}
-        />
-      </View>
-      <View style={{height: 16}} />
-
-      <Text style={styles.label}>Password</Text>
-      <View style={styles.inputContainer}>
-        <Input
-          placeholder="Masukkan password Anda"
-          placeholderTextColor="rgba(0, 0, 0, 0.7)"
-          style={styles.input}
-          secureTextEntry={!isPasswordVisible}
-        />
-        <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
-          {isPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
-        </TouchableOpacity>
-      </View>
-      <View style={{height: 16}} />
-
-      <Text style={styles.label}>Konfirmasi Password</Text>
-      <View style={styles.inputContainer}>
-        <Input
-          placeholder="Konfirmasi password Anda"
-          placeholderTextColor="rgba(0, 0, 0, 0.7)"
-          style={styles.input}
-          secureTextEntry={!isConfirmPasswordVisible}
-        />
-        <TouchableOpacity
-          onPress={() => setIsConfirmPasswordVisible(!isConfirmPasswordVisible)}>
-          {isConfirmPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
-        </TouchableOpacity>
-      </View>
+      <Text style={styles.subtitle}>Buat akun baru</Text>
       <View style={{height: 32}} />
-
-      <Button text="Daftar" color="#535BE9" buttonColor="white" />
+      <View style={styles.inputBlock}>
+        <Text style={styles.label}>Nama Lengkap</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Masukkan nama lengkap Anda"
+          placeholderTextColor="rgba(0,0,0,0.7)"
+          value={name}
+          onChangeText={setName}
+        />
+      </View>
+      <View style={styles.inputBlock}>
+        <Text style={styles.label}>Email</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Masukkan email Anda"
+          placeholderTextColor="rgba(0,0,0,0.7)"
+          value={email}
+          onChangeText={setEmail}
+        />
+      </View>
+      <View style={styles.inputBlock}>
+        <Text style={styles.label}>Password</Text>
+        <View style={styles.passwordWrapper}>
+          <TextInput
+            style={styles.inputPassword}
+            placeholder="Masukkan password Anda"
+            placeholderTextColor="rgba(0,0,0,0.7)"
+            secureTextEntry={!showPassword}
+            value={password}
+            onChangeText={setPassword}
+          />
+          <TouchableOpacity
+            style={styles.eyeButton}
+            onPress={() => setShowPassword(!showPassword)}>
+            <EyeIcon visible={showPassword} />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.inputBlock}>
+        <Text style={styles.label}>Konfirmasi Password</Text>
+        <View style={styles.passwordWrapper}>
+          <TextInput
+            style={styles.inputPassword}
+            placeholder="Konfirmasi password Anda"
+            placeholderTextColor="rgba(0,0,0,0.7)"
+            secureTextEntry={!showConfirmPassword}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+          />
+          <TouchableOpacity
+            style={styles.eyeButton}
+            onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+            <EyeIcon visible={showConfirmPassword} />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <TouchableOpacity
+        style={styles.customButton}
+        activeOpacity={0.7}
+        onPress={() => {/* TODO: handle sign up or navigate */}}
+      >
+        <Text style={styles.customButtonText}>Daftar</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -155,64 +98,102 @@ const SignUp = ({navigation}: {navigation: any}) => {
 export default SignUp;
 
 const styles = StyleSheet.create({
-  page: {
+  container: {
     flex: 1,
-    backgroundColor: 'white',
-    padding: 36,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingTop: 24,
   },
   backButton: {
     position: 'absolute',
-    top: 20,
-    left: 20,
-    zIndex: 1,
-  },
-  logoContainer: {
+    left: 16,
+    top: 16,
+    zIndex: 2,
+    padding: 0,
+    width: 23,
+    height: 34,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 30,
-    marginTop: 60,
+  },
+  logoWrapper: {
+    marginTop: 40,
+    marginBottom: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   logo: {
     width: 72,
     height: 72,
-    borderRadius: 72 / 2,
-    backgroundColor: 'rgba(144, 150, 248, 0.2)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 26,
-    fontFamily: 'Poppins-Bold',
-    fontWeight: '700',
-    color: '#535BE9',
-    textAlign: 'center',
-    marginBottom: 8,
+    borderRadius: 36,
+    borderWidth: 1,
+    borderColor: '#9095F8',
+    resizeMode: 'contain',
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: 16,
+    color: '#737B86',
     fontFamily: 'Poppins-Regular',
-    color: '#797979',
+    marginTop: 16,
+    marginBottom: 24,
     textAlign: 'center',
   },
+  inputBlock: {
+    width: '100%',
+    marginBottom: 16,
+  },
   label: {
-    color: 'rgba(0, 0, 0, 0.8)',
     fontSize: 15,
+    fontWeight: '600',
+    color: '#021317',
     fontFamily: 'Poppins-SemiBold',
     marginBottom: 8,
   },
-  inputContainer: {
+  input: {
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+    borderRadius: 10,
+    paddingHorizontal: 13,
+    paddingVertical: 12,
+    fontSize: 12,
+    color: '#000',
+    fontFamily: 'Poppins-Regular',
+  },
+  passwordWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'rgba(255,255,255,0.08)',
     borderWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 0.4)',
+    borderColor: '#E2E8F0',
     borderRadius: 10,
-    paddingHorizontal: 12,
-  },
-  input: {
-    flex: 1,
+    paddingHorizontal: 13,
     height: 48,
-    color: 'black',
-    fontFamily: 'Poppins-Regular',
+  },
+  inputPassword: {
+    flex: 1,
     fontSize: 12,
+    color: '#000',
+    fontFamily: 'Poppins-Regular',
+  },
+  eyeButton: {
+    padding: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  customButton: {
+    backgroundColor: '#535BE9',
+    borderRadius: 10,
+    height: 43,
+    width: 318,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 32,
+  },
+  customButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
   },
 });

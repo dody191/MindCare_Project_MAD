@@ -1,11 +1,16 @@
-import {StyleSheet, Text, View, TextInput as Input} from 'react-native';
+import {StyleSheet, Text, View, TextInput as Input, TextInputProps} from 'react-native';
 import React from 'react';
 
-const TextInput = ({text, placeholder}) => {
+interface CustomTextInputProps extends TextInputProps {
+  text?: string;
+  placeholder?: string;
+}
+
+const TextInput = ({text, placeholder, ...props}: CustomTextInputProps) => {
   return (
     <View>
-      <Text style={styles.label}>{text}</Text>
-      <Input placeholder={placeholder} style={styles.input} />
+      {text && <Text style={styles.label}>{text}</Text>}
+      <Input placeholder={placeholder} style={styles.input} {...props} />
     </View>
   );
 };

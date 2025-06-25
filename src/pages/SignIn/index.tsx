@@ -1,171 +1,120 @@
 import React, {useState} from 'react';
-import {
-  Modal,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  TextInput as Input,
-} from 'react-native';
-import {Svg, Path} from 'react-native-svg';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Modal} from 'react-native';
 import Button from '../../components/atoms/Button';
+import MindCare from '../../assets/mindcare.png';
 
-const EyeIcon = () => (
-  <Svg width="17" height="17" viewBox="0 0 24 24" fill="none">
-    <Path
-      d="M15.58,12c0,1.98-1.6,3.58-3.58,3.58S8.42,13.98,8.42,12,10.02,8.42,12,8.42,15.58,10.02,15.58,12Z"
-      stroke="#737B86"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <Path
-      d="M12,20.27c-5.3,0-9.27-3.93-9.27-3.93A5.06,5.06,0,0,1,2.73,12a5.06,5.06,0,0,1,0-4.34S6.7,3.73,12,3.73s9.27,3.93,9.27,3.93a5.06,5.06,0,0,1,0,4.34S17.3,20.27,12,20.27Z"
-      stroke="#737B86"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </Svg>
+const EyeIcon = ({visible}: {visible: boolean}) => (
+  <Image
+    source={visible ? require('../../assets/eye.png') : require('../../assets/eye.png')}
+    style={{width: 17, height: 17, tintColor: '#737B86'}}
+  />
 );
 
-const EyeOffIcon = () => (
-  <Svg width="17" height="17" viewBox="0 0 24 24" fill="none">
-    <Path
-      d="M17.94,17.94A9.99,9.99,0,0,1,12,20.27c-5.3,0-9.27-3.93-9.27-3.93a5.06,5.06,0,0,1,1.11-2.43"
-      stroke="#737B86"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-    <Path
-      d="M12,8.42a3.58,3.58,0,0,1,3.58,3.58,3.56,3.56,0,0,1-.1,0.7"
-      stroke="#737B86"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-    <Path
-      d="M21.27,16.34s-4-3.93-9.27-3.93a9.8,9.8,0,0,0-2.3.26"
-      stroke="#737B86"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-    <Path
-      d="M2.73,3.73,21.27,22.27"
-      stroke="#737B86"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-  </Svg>
-);
-
-const CloseIcon = () => (
-  <Svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <Path
-      d="M18 6L6 18M6 6l12 12"
-      stroke="#000"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </Svg>
-);
-
-const HeartIcon = () => (
-  <Svg width="32" height="32" viewBox="0 0 24 24" fill="#535BE9">
-    <Path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-  </Svg>
-);
-
-const SignIn = ({navigation}: {navigation: any}) => {
+const SignIn = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [resetEmail, setResetEmail] = useState('');
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  const togglePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
+  const handleSendReset = () => {
+    setModalVisible(false);
+    setShowSuccess(true);
+    setTimeout(() => setShowSuccess(false), 2000);
   };
 
   return (
-    <View style={styles.page}>
+    <View style={styles.container}>
+      {/* Success Banner */}
+      {showSuccess && (
+        <View style={styles.successBanner}>
+          <Text style={styles.successText}>Link Berhasil di kirim!</Text>
+        </View>
+      )}
+      {/* Modal Lupa Password */}
       <Modal
-        animationType="fade"
-        transparent={true}
         visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}>
+        transparent
+        animationType="fade"
+        onRequestClose={() => setModalVisible(false)}
+      >
         <View style={styles.modalOverlay}>
-          <View style={styles.modalView}>
+          <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Lupa Password</Text>
-              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                <CloseIcon />
+              <TouchableOpacity onPress={() => setModalVisible(false)}>
+                <Text style={styles.closeButton}>×</Text>
               </TouchableOpacity>
             </View>
             <Text style={styles.label}>Email</Text>
-            <View style={styles.inputContainer}>
-              <Input
-                placeholder="Masukkan email Anda"
-                placeholderTextColor="#737B86"
-                style={styles.input}
-              />
-            </View>
+            <TextInput
+              style={styles.input}
+              placeholder="Masukkan email Anda"
+              placeholderTextColor="rgba(0,0,0,0.7)"
+              value={resetEmail}
+              onChangeText={setResetEmail}
+            />
             <Text style={styles.modalSubtitle}>
               Kami akan mengirimkan link reset password ke email Anda.
             </Text>
-            <Button
-              text="Kirim Link Reset"
-              color="#535BE9"
-              buttonColor="white"
-            />
+            <TouchableOpacity style={styles.customButton} activeOpacity={0.7} onPress={handleSendReset}>
+              <Text style={styles.customButtonText}>Kirim Link Reset</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
-
-      <View style={styles.logoContainer}>
-        <View style={styles.logo}>
-          <HeartIcon />
-        </View>
-        <Text style={styles.title}>MindCare</Text>
-        <Text style={styles.subtitle}>Masuk ke akun anda</Text>
+      {/* End Modal */}
+      <View style={styles.logoWrapper}>
+        <Image source={MindCare} style={styles.logo} />
       </View>
-      <View>
+      <Text style={styles.mindcareTitle}>MindCare</Text>
+      <Text style={styles.subtitle}>Masuk ke akun anda</Text>
+      <View style={{height: 32}} />
+      <View style={styles.inputBlock}>
         <Text style={styles.label}>Email</Text>
-        <View style={styles.inputContainer}>
-          <Input
-            placeholder="Masukkan email Anda"
-            placeholderTextColor="#737B86"
-            style={styles.input}
-          />
-        </View>
+        <TextInput
+          style={styles.input}
+          placeholder="Masukkan email Anda"
+          placeholderTextColor="rgba(0,0,0,0.7)"
+          value={email}
+          onChangeText={setEmail}
+        />
       </View>
       <View style={{height: 24}} />
-      <View>
+      <View style={styles.inputBlock}>
         <Text style={styles.label}>Password</Text>
-        <View style={styles.inputContainer}>
-          <Input
+        <View style={styles.passwordWrapper}>
+          <TextInput
+            style={styles.inputPassword}
             placeholder="Masukkan password Anda"
-            placeholderTextColor="#737B86"
-            style={styles.input}
-            secureTextEntry={!isPasswordVisible}
+            placeholderTextColor="rgba(0,0,0,0.7)"
+            secureTextEntry={!showPassword}
+            value={password}
+            onChangeText={setPassword}
           />
-          <TouchableOpacity onPress={togglePasswordVisibility}>
-            {isPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
+          <TouchableOpacity
+            style={styles.eyeButton}
+            onPress={() => setShowPassword(!showPassword)}>
+            <EyeIcon visible={showPassword} />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
+        <TouchableOpacity style={styles.forgotWrapper} onPress={() => setModalVisible(true)}>
           <Text style={styles.forgot}>Lupa password?</Text>
         </TouchableOpacity>
       </View>
-      <View style={{height: 24}} />
-      <Button text="Masuk" color="#535BE9" buttonColor="white" />
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>Belum punya akun? </Text>
+      <View style={{height: 32}} />
+      <TouchableOpacity
+        style={styles.customButton}
+        activeOpacity={0.7}
+        onPress={() => navigation.navigate('Dashboard')}
+      >
+        <Text style={styles.customButtonText}>Masuk</Text>
+      </TouchableOpacity>
+      <View style={styles.signupWrapper}>
+        <Text style={styles.signupText}>Belum punya akun? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-          <Text style={styles.footerLink}>Daftar sekarang</Text>
+          <Text style={styles.signupLink}>Daftar sekarang</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -175,117 +124,200 @@ const SignIn = ({navigation}: {navigation: any}) => {
 export default SignIn;
 
 const styles = StyleSheet.create({
-  page: {
+  container: {
     flex: 1,
-    backgroundColor: 'white',
-    padding: 36,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingTop: 40,
   },
-  modalOverlay: {
-    flex: 1,
+  logoWrapper: {
+    backgroundColor: '#fff',
+    borderRadius: 100,
+    width: 100,
+    height: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'stretch',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-    width: '90%',
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  modalTitle: {
-    fontSize: 15,
-    fontFamily: 'Poppins-SemiBold',
-    fontWeight: '600',
-  },
-  modalSubtitle: {
-    fontSize: 9,
-    fontFamily: 'Poppins-Regular',
-    color: 'rgba(0, 0, 0, 0.70)',
-    marginVertical: 15,
-  },
-  logoContainer: {
-    alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 8,
   },
   logo: {
     width: 72,
     height: 72,
-    borderRadius: 72 / 2,
-    backgroundColor: 'rgba(144, 150, 248, 0.2)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
+    borderRadius: 36,
+    borderWidth: 1,
+    borderColor: '#9095F8',
+    resizeMode: 'contain',
   },
-  title: {
-    fontSize: 26,
-    fontFamily: 'Poppins-Bold',
-    fontWeight: '700',
-    color: '#535BE9',
+  mindcareTitle: {
+    width: 157,
+    height: 36,
     textAlign: 'center',
-    marginBottom: 8,
+    color: '#535BE9',
+    fontSize: 26,
+    fontFamily: 'Poppins',
+    fontWeight: '700',
+    flexWrap: 'wrap',
+    alignSelf: 'center',
   },
   subtitle: {
     fontSize: 14,
-    fontFamily: 'Poppins-Regular',
     color: '#737B86',
+    fontFamily: 'Poppins-Regular',
+    marginTop: 4,
+    marginBottom: 24,
     textAlign: 'center',
   },
+  inputBlock: {
+    width: '100%',
+  },
   label: {
-    color: '#021317',
     fontSize: 15,
+    fontWeight: '600',
+    color: '#021317',
     fontFamily: 'Poppins-SemiBold',
     marginBottom: 8,
   },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  input: {
+    backgroundColor: 'rgba(255,255,255,0.08)',
     borderWidth: 1,
     borderColor: '#E2E8F0',
     borderRadius: 10,
-    paddingHorizontal: 12,
-  },
-  input: {
-    flex: 1,
-    height: 48,
-    color: 'black',
-    fontFamily: 'Poppins-Regular',
+    paddingHorizontal: 13,
+    paddingVertical: 12,
     fontSize: 12,
+    color: '#000',
+    fontFamily: 'Poppins-Regular',
+  },
+  passwordWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+    borderRadius: 10,
+    paddingHorizontal: 13,
+    height: 48,
+  },
+  inputPassword: {
+    flex: 1,
+    fontSize: 12,
+    color: '#000',
+    fontFamily: 'Poppins-Regular',
+  },
+  eyeButton: {
+    padding: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  forgotWrapper: {
+    alignSelf: 'flex-end',
+    marginTop: 8,
   },
   forgot: {
-    textAlign: 'right',
     color: '#535BE9',
     fontSize: 12,
     fontFamily: 'Poppins-Medium',
-    marginTop: 12,
+    fontWeight: '500',
   },
-  footer: {
+  customButton: {
+    backgroundColor: '#535BE9',
+    borderRadius: 10,
+    height: 43,
+    width: 318,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+  customButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
+  },
+  signupWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 24,
   },
-  footerText: {
+  signupText: {
     color: '#4B5563',
     fontSize: 12,
     fontFamily: 'Poppins-Regular',
   },
-  footerLink: {
+  signupLink: {
     color: '#535BE9',
+    fontWeight: '600',
     fontSize: 12,
     fontFamily: 'Poppins-SemiBold',
+  },
+  // Modal styles
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 24,
+    width: '90%',
+    maxWidth: 400,
+    alignItems: 'stretch',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#021317',
+    fontFamily: 'Poppins-SemiBold',
+  },
+  closeButton: {
+    fontSize: 28,
+    color: '#A3A3A3',
+    fontWeight: 'bold',
+    marginLeft: 8,
+  },
+  modalSubtitle: {
+    width: 257,
+    height: 27,
+    color: 'rgba(0,0,0,0.7)',
+    fontSize: 12,
+    fontFamily: 'Poppins',
+    fontWeight: '400',
+    flexWrap: 'wrap',
+    marginTop: 12,
+    marginBottom: 20,
+    textAlign: 'left',
+  },
+  successBanner: {
+    position: 'absolute',
+    top: 16,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    zIndex: 10,
+  },
+  successText: {
+    backgroundColor: '#E6FAEA',
+    color: '#2DB964',
+    fontSize: 16,
+    fontFamily: 'Poppins-Regular',
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    borderRadius: 10,
+    textAlign: 'center',
+    overflow: 'hidden',
+    minWidth: 300,
   },
 });
