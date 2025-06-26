@@ -28,7 +28,7 @@ const Journal1 = ({navigation}) => {
         </View>
         <TouchableOpacity
           style={styles.addBtn}
-          onPress={() => navigation.navigate('JournalWrite')}>
+          onPress={() => navigation.navigate('Journal2')}>
           <Image source={PlusMath} style={styles.addIcon} />
           <Text style={styles.addBtnText}>Tulis Jurnal</Text>
         </TouchableOpacity>

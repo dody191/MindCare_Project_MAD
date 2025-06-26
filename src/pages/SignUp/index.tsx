@@ -1,11 +1,23 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  Alert,
+} from 'react-native';
 import MindCare from '../../assets/mindcare.png';
-import { ArrowBack } from '../../assets';
+import ArrowBack from '../../assets/arrow-back.svg';
 
 const EyeIcon = ({visible}: {visible: boolean}) => (
   <Image
-    source={require('../../assets/eye.png')}
+    source={
+      visible
+        ? require('../../assets/eye-open.png')
+        : require('../../assets/eye.png')
+    }
     style={{width: 17, height: 17, tintColor: '#737B86'}}
   />
 );
@@ -18,9 +30,24 @@ const SignUp = ({navigation}) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const handleSignUp = () => {
+    if (!name || !email || !password || !confirmPassword) {
+      Alert.alert('Error', 'Semua field harus diisi.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      Alert.alert('Error', 'Password dan konfirmasi password tidak sama.');
+      return;
+    }
+    // TODO: Tambahkan logika pendaftaran ke backend di sini
+    Alert.alert('Sukses', 'Akun berhasil dibuat!');
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}>
         <ArrowBack width={23} height={34} />
       </TouchableOpacity>
       <View style={styles.logoWrapper}>
@@ -87,8 +114,7 @@ const SignUp = ({navigation}) => {
       <TouchableOpacity
         style={styles.customButton}
         activeOpacity={0.7}
-        onPress={() => {/* TODO: handle sign up or navigate */}}
-      >
+        onPress={handleSignUp}>
         <Text style={styles.customButtonText}>Daftar</Text>
       </TouchableOpacity>
     </View>

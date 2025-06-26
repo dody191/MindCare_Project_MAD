@@ -23,16 +23,14 @@ const Profile = ({navigation}) => {
         <Image source={IconProfile} style={styles.profileIcon} />
         <View style={{flex: 1, marginLeft: 8}}>
           <Text style={styles.profileName}>John Doe</Text>
-          <View
-            style={{flexDirection: 'row', alignItems: 'center', marginTop: 2}}>
+          <View style={styles.memberRow}>
             <Image source={IconCalendar} style={styles.calendarIcon} />
             <Text style={styles.memberText}>Member sejak 1/1/2024</Text>
           </View>
         </View>
         <TouchableOpacity
           style={styles.editBtn}
-          onPress={() => navigation.navigate('EditProfile')}
-        >
+          onPress={() => navigation.navigate('EditProfile')}>
           <Image source={IconEdit} style={styles.editIcon} />
           <Text style={styles.editBtnText}>Edit Profil</Text>
         </TouchableOpacity>
@@ -47,10 +45,9 @@ const Profile = ({navigation}) => {
           </View>
           <Text style={styles.label}>Nama Lengkap</Text>
           <Text style={styles.value}>John Doe</Text>
-          <View
-            style={{flexDirection: 'row', alignItems: 'center', marginTop: 8}}>
+          <View style={styles.infoRow}>
             <Image source={IconCalendar} style={styles.infoIcon} />
-            <Text style={styles.labelLink}>Tanggal Lahir</Text>
+            <Text style={styles.label}>Tanggal Lahir</Text>
           </View>
           <Text style={styles.value}>15/1/1990</Text>
         </View>
@@ -61,14 +58,12 @@ const Profile = ({navigation}) => {
             <Image source={IconContact} style={styles.sectionIcon} />
             <Text style={styles.sectionTitle}>Informasi Kontak</Text>
           </View>
-          <View
-            style={{flexDirection: 'row', alignItems: 'center', marginTop: 8}}>
+          <View style={styles.infoRow}>
             <Image source={IconMail} style={styles.infoIcon} />
             <Text style={styles.label}>Email</Text>
           </View>
           <Text style={styles.value}>Johndoe@gmail.com</Text>
-          <View
-            style={{flexDirection: 'row', alignItems: 'center', marginTop: 8}}>
+          <View style={styles.infoRow}>
             <Image source={IconPhone} style={styles.infoIcon} />
             <Text style={styles.label}>Nomor Telepon</Text>
           </View>
@@ -81,8 +76,7 @@ const Profile = ({navigation}) => {
             <Image source={HomeAddress} style={styles.sectionIcon} />
             <Text style={styles.sectionTitle}>Informasi Alamat</Text>
           </View>
-          <View
-            style={{flexDirection: 'row', alignItems: 'center', marginTop: 8}}>
+          <View style={styles.infoRow}>
             <Image source={IconLocation} style={styles.infoIcon} />
             <Text style={styles.label}>Alamat</Text>
           </View>
@@ -111,18 +105,23 @@ const styles = StyleSheet.create({
     borderBottomColor: '#E5E5E5',
   },
   backBtn: {
-    marginRight: 15,
+    marginRight: 10,
   },
   profileIcon: {
-    width: 28,
-    height: 28,
+    width: 32,
+    height: 32,
     resizeMode: 'contain',
   },
   profileName: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#222',
     fontFamily: 'Poppins-Bold',
+  },
+  memberRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 2,
   },
   calendarIcon: {
     width: 14,
@@ -131,7 +130,7 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   memberText: {
-    fontSize: 12,
+    fontSize: 13,
     color: '#8D92A3',
     fontFamily: 'Poppins-Regular',
   },
@@ -149,6 +148,7 @@ const styles = StyleSheet.create({
     height: 18,
     resizeMode: 'contain',
     marginRight: 8,
+    tintColor: '#fff',
   },
   editBtnText: {
     color: '#fff',
@@ -173,8 +173,8 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   sectionIcon: {
-    width: 22,
-    height: 22,
+    width: 35,
+    height: 35,
     tintColor: '#1746FF',
     marginRight: 8,
     resizeMode: 'contain',
@@ -189,28 +189,29 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#222',
     fontFamily: 'Poppins-Bold',
+    marginLeft: 8,
+    marginRight: 8,
     marginTop: 8,
-  },
-  labelLink: {
-    fontSize: 14,
-    color: '#1746FF',
-    fontFamily: 'Poppins-Bold',
-    marginLeft: 4,
-    textDecorationLine: 'underline',
   },
   value: {
     fontSize: 14,
     color: '#222',
     fontFamily: 'Poppins-Regular',
-    marginLeft: 28,
+    marginLeft: 8,
     marginTop: 2,
   },
+  infoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+  },
   infoIcon: {
-    width: 25, //
-    height: 25,
+    width: 35,
+    height: 35,
     resizeMode: 'contain',
-    marginRight: 4,
+    marginRight: 8,
     marginLeft: 8,
+    tintColor: '#8D92A3',
   },
   divider: {
     borderBottomWidth: 1,

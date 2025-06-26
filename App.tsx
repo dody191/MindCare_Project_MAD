@@ -8,6 +8,7 @@ import Profile from './src/pages/Profile';
 import EditProfile from './src/pages/EditProfile';
 import Tips from './src/pages/Tips';
 import Journal1 from './src/pages/Journal1';
+import Journal2 from './src/pages/Journal2';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import './src/config/firebase';
@@ -61,6 +62,11 @@ const App = () => {
         <Stack.Screen
           name="Journal1"
           component={Journal1}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Journal2"
+          component={Journal2}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
