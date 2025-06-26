@@ -23,22 +23,12 @@ const Journal1 = ({navigation}) => {
           <ArrowBack width={24} height={24} />
         </TouchableOpacity>
         <View style={styles.headerLeft}>
-<<<<<<< HEAD
-          <View style={styles.logoCircle}>
-            <Image source={MindCareLogo} style={styles.logo} />
-          </View>
-=======
           <Image source={MindCareLogo} style={styles.logo} />
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
           <Text style={styles.logoText}>MindCare</Text>
         </View>
         <TouchableOpacity
           style={styles.addBtn}
-<<<<<<< HEAD
-          onPress={() => navigation.navigate('Journal2')}>
-=======
           onPress={() => navigation.navigate('JournalWrite')}>
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
           <Image source={PlusMath} style={styles.addIcon} />
           <Text style={styles.addBtnText}>Tulis Jurnal</Text>
         </TouchableOpacity>
@@ -121,26 +111,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   logo: {
-<<<<<<< HEAD
-    width: 35,
-    height: 35,
-    resizeMode: 'contain',
-=======
     width: 28,
     height: 28,
     resizeMode: 'contain',
     marginRight: 6,
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
   },
   logoText: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#1746FF',
     fontFamily: 'Poppins-Bold',
-<<<<<<< HEAD
-    marginLeft: 8,
-=======
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
   },
   addBtn: {
     flexDirection: 'row',
@@ -156,10 +136,6 @@ const styles = StyleSheet.create({
     height: 16,
     resizeMode: 'contain',
     marginRight: 8,
-<<<<<<< HEAD
-    tintColor: '#fff',
-=======
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
   },
   addBtnText: {
     color: '#fff',
@@ -245,8 +221,4 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
     marginTop: 4,
   },
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253

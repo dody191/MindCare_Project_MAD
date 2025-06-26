@@ -29,11 +29,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-<<<<<<< HEAD
-  logo: {
-    width: 100,
-    height: 100,
-=======
   logoWrapper: {
     backgroundColor: '#5B6BF7',
     borderRadius: 100,
@@ -46,7 +41,6 @@ const styles = StyleSheet.create({
   logo: {
     width: 80,
     height: 80,
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
     resizeMode: 'contain',
   },
   title: {
@@ -64,8 +58,4 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     textAlign: 'center',
   },
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253

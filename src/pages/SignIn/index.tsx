@@ -1,31 +1,15 @@
 import React, {useState} from 'react';
-<<<<<<< HEAD
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  Modal,
-} from 'react-native';
-=======
 import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Modal} from 'react-native';
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
 import Button from '../../components/atoms/Button';
 import MindCare from '../../assets/mindcare.png';
 
 const EyeIcon = ({visible}: {visible: boolean}) => (
   <Image
-<<<<<<< HEAD
     source={
       visible
         ? require('../../assets/eye-open.png')
         : require('../../assets/eye.png')
     }
-=======
-    source={visible ? require('../../assets/eye.png') : require('../../assets/eye.png')}
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
     style={{width: 17, height: 17, tintColor: '#737B86'}}
   />
 );
@@ -37,19 +21,15 @@ const SignIn = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
-<<<<<<< HEAD
   const [resetPasswordVisible, setResetPasswordVisible] = useState(false);
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-=======
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
 
   const handleSendReset = () => {
     setModalVisible(false);
     setShowSuccess(true);
-<<<<<<< HEAD
     setTimeout(() => {
       setShowSuccess(false);
       setResetPasswordVisible(true);
@@ -60,19 +40,12 @@ const SignIn = ({navigation}) => {
     // Tambahkan validasi password jika perlu
     setResetPasswordVisible(false);
     // Lakukan aksi reset password di sini
-=======
-    setTimeout(() => setShowSuccess(false), 2000);
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
   };
 
   return (
     <View style={styles.container}>
       {/* Success Banner */}
-<<<<<<< HEAD
       {showSuccess && !resetPasswordVisible && (
-=======
-      {showSuccess && (
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
         <View style={styles.successBanner}>
           <Text style={styles.successText}>Link Berhasil di kirim!</Text>
         </View>
@@ -82,12 +55,7 @@ const SignIn = ({navigation}) => {
         visible={modalVisible}
         transparent
         animationType="fade"
-<<<<<<< HEAD
         onRequestClose={() => setModalVisible(false)}>
-=======
-        onRequestClose={() => setModalVisible(false)}
-      >
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
@@ -107,20 +75,15 @@ const SignIn = ({navigation}) => {
             <Text style={styles.modalSubtitle}>
               Kami akan mengirimkan link reset password ke email Anda.
             </Text>
-<<<<<<< HEAD
             <TouchableOpacity
               style={styles.customButton}
               activeOpacity={0.7}
               onPress={handleSendReset}>
-=======
-            <TouchableOpacity style={styles.customButton} activeOpacity={0.7} onPress={handleSendReset}>
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
               <Text style={styles.customButtonText}>Kirim Link Reset</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
-<<<<<<< HEAD
       {/* Modal Reset Password */}
       <Modal
         visible={resetPasswordVisible}
@@ -176,8 +139,6 @@ const SignIn = ({navigation}) => {
           </View>
         </View>
       </Modal>
-=======
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
       {/* End Modal */}
       <View style={styles.logoWrapper}>
         <Image source={MindCare} style={styles.logo} />
@@ -213,13 +174,9 @@ const SignIn = ({navigation}) => {
             <EyeIcon visible={showPassword} />
           </TouchableOpacity>
         </View>
-<<<<<<< HEAD
         <TouchableOpacity
           style={styles.forgotWrapper}
           onPress={() => setModalVisible(true)}>
-=======
-        <TouchableOpacity style={styles.forgotWrapper} onPress={() => setModalVisible(true)}>
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
           <Text style={styles.forgot}>Lupa password?</Text>
         </TouchableOpacity>
       </View>
@@ -227,12 +184,7 @@ const SignIn = ({navigation}) => {
       <TouchableOpacity
         style={styles.customButton}
         activeOpacity={0.7}
-<<<<<<< HEAD
         onPress={() => navigation.navigate('Dashboard')}>
-=======
-        onPress={() => navigation.navigate('Dashboard')}
-      >
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
         <Text style={styles.customButtonText}>Masuk</Text>
       </TouchableOpacity>
       <View style={styles.signupWrapper}>
@@ -376,22 +328,10 @@ const styles = StyleSheet.create({
   },
   // Modal styles
   modalOverlay: {
-<<<<<<< HEAD
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 100,
-=======
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.4)',
     justifyContent: 'center',
     alignItems: 'center',
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
   },
   modalContent: {
     backgroundColor: '#fff',
@@ -401,11 +341,7 @@ const styles = StyleSheet.create({
     maxWidth: 400,
     alignItems: 'stretch',
     shadowColor: '#000',
-<<<<<<< HEAD
-    shadowOffset: {width: 0, height: 2},
-=======
     shadowOffset: { width: 0, height: 2 },
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
@@ -460,13 +396,14 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     minWidth: 300,
   },
-<<<<<<< HEAD
   resetButton: {
     backgroundColor: '#535BE9',
     borderRadius: 10,
-    height: 43,
+    height: 40,
+    width: 270,
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
     marginTop: 16,
   },
   resetButtonText: {
@@ -476,6 +413,3 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
   },
 });
-=======
-});
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253

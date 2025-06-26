@@ -9,20 +9,22 @@ import IconLogout from '../../assets/Logout.png';
 const Dashboard = ({navigation}) => {
   return (
     <View style={styles.pageContainer}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.headerLeft}>
-          <Image source={MindCareLogo} style={styles.logo} />
-          <Text style={styles.logoText}>MindCare</Text>
-        </View>
-        <View style={styles.headerRight}>
-          <Text style={styles.headerText}>Selamat datang John!</Text>
-          <TouchableOpacity
-            style={styles.logoutBtn}
-            onPress={() => navigation.replace('SignIn')}>
-            <Image source={IconLogout} style={styles.logoutIconImg} />
-            <Text style={styles.logoutText}>Keluar</Text>
-          </TouchableOpacity>
+      {/* Header Box */}
+      <View style={styles.headerBox}>
+        <View style={styles.header}>
+          <View style={styles.headerLeft}>
+            <Image source={MindCareLogo} style={styles.logo} />
+            <Text style={styles.logoText}>MindCare</Text>
+          </View>
+          <View style={styles.headerRight}>
+            <Text style={styles.headerText}>Selamat datang John!</Text>
+            <TouchableOpacity
+              style={styles.logoutBtn}
+              onPress={() => navigation.replace('SignIn')}>
+              <Image source={IconLogout} style={styles.logoutIconImg} />
+              <Text style={styles.logoutText}>Keluar</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
 
@@ -99,11 +101,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingTop: 24,
   },
+  headerBox: {
+    width: 390,
+    height: 81,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 4, // Untuk Android
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0)',
+    marginBottom: 16,
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
     justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    height: 81,
   },
   headerLeft: {
     flexDirection: 'row',
@@ -220,20 +238,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Poppins-Bold',
   },
-<<<<<<< HEAD
-  headerBox: {
-    width: 390,
-    height: 81,
-    backgroundColor: '#fff',
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 4, // Untuk Android
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0)',
-  },
 });
-=======
-});
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
