@@ -1,148 +1,69 @@
 import React from 'react';
-<<<<<<< HEAD
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from 'react-native';
-=======
 import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
 import ArrowBack from '../../assets/arrow-back.svg';
 import Light from '../../assets/Light.png';
 import DeliveryTime from '../../assets/DeliveryTime.png';
 import HandDrawnStar from '../../assets/HandDrawnStar.png';
 import MoodDepression from '../../assets/MoodDepression.png';
 
-<<<<<<< HEAD
-const Tips = ({navigation}) => {
-=======
 const Tips = ({ navigation }) => {
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
   return (
     <View style={styles.pageContainer}>
       {/* Header */}
       <View style={styles.header}>
-<<<<<<< HEAD
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backBtn}>
-=======
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backBtn}>
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
           <ArrowBack width={24} height={24} />
         </TouchableOpacity>
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           <Text style={styles.headerTitle}>Tips Kesehatan Mental</Text>
           <Text style={styles.headerSubtitle}>
-<<<<<<< HEAD
-            Kumpulan tips dan panduan untuk menjaga kesehatan mental Anda setiap
-            hari.
-=======
             Kumpulan tips dan panduan untuk menjaga kesehatan mental Anda setiap hari.
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
           </Text>
         </View>
       </View>
-      <ScrollView contentContainerStyle={{paddingBottom: 24}}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 24 }}>
         {/* Card 1 */}
         <View style={styles.tipCard}>
           <View style={styles.tipHeader}>
-<<<<<<< HEAD
-            <View style={styles.iconWrapper}>
-              <Image source={Light} style={styles.tipIcon} />
-            </View>
-            <Text style={styles.tipLabelStres}>Stres</Text>
-            <Text style={styles.tipTitle}>
-              Teknik Pernapasan untuk Mengurangi Stress
-            </Text>
-          </View>
-          <Text style={styles.tipDesc}>
-            Cobalah teknik pernapasan 4-7-8: Tarik napas selama 4 detik, tahan
-            selama 7 detik, dan hembuskan selama 8 detik. Ulangi 3-4 kali.
-=======
             <Image source={Light} style={styles.tipIcon} />
             <Text style={styles.tipLabelStres}>Stres</Text>
             <Text style={styles.tipTitle}>Teknik Pernapasan untuk Mengurangi Stress</Text>
           </View>
           <Text style={styles.tipDesc}>
             Cobalah teknik pernapasan 4-7-8: Tarik napas selama 4 detik, tahan selama 7 detik, dan hembuskan selama 8 detik. Ulangi 3-4 kali.
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
           </Text>
         </View>
         {/* Card 2 */}
         <View style={styles.tipCard}>
           <View style={styles.tipHeader}>
-<<<<<<< HEAD
-            <View style={styles.iconWrapper}>
-              <Image source={DeliveryTime} style={styles.tipIcon} />
-            </View>
-            <Text style={styles.tipLabelTidur}>Tidur</Text>
-            <Text style={styles.tipTitle}>
-              Cara Membangun Runitas Tidur yang Sehat
-            </Text>
-          </View>
-          <Text style={styles.tipDesc}>
-            Tidur dan bangun pada waktu yang sama setiap hari. Hindari layar 1
-            jam sebelum tidur dan ciptakan lingkungan yang tenang
-=======
             <Image source={DeliveryTime} style={styles.tipIcon} />
             <Text style={styles.tipLabelTidur}>Tidur</Text>
             <Text style={styles.tipTitle}>Cara Membangun Runitas Tidur yang Sehat</Text>
           </View>
           <Text style={styles.tipDesc}>
             Tidur dan bangun pada waktu yang sama setiap hari. Hindari layar 1 jam sebelum tidur dan ciptakan lingkungan yang tenang
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
           </Text>
         </View>
         {/* Card 3 */}
         <View style={styles.tipCard}>
           <View style={styles.tipHeader}>
-<<<<<<< HEAD
-            <View style={styles.iconWrapper}>
-              <Image source={HandDrawnStar} style={styles.tipIcon} />
-            </View>
-            <Text style={styles.tipLabelKecemasan}>Kecemasan</Text>
-            <Text style={styles.tipTitle}>
-              Mengelola Kecemasan dengan Mindfulness
-            </Text>
-          </View>
-          <Text style={styles.tipDesc}>
-            Praktikkan mindfulness dengan fokus pada saat ini. Perhatikan napas,
-            sensasi tubuh, dan pikiran tanpa menghakimi.
-=======
             <Image source={HandDrawnStar} style={styles.tipIcon} />
             <Text style={styles.tipLabelKecemasan}>Kecemasan</Text>
             <Text style={styles.tipTitle}>Mengelola Kecemasan dengan Mindfulness</Text>
           </View>
           <Text style={styles.tipDesc}>
             Praktikkan mindfulness dengan fokus pada saat ini. Perhatikan napas, sensasi tubuh, dan pikiran tanpa menghakimi.
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
           </Text>
         </View>
         {/* Card 4 */}
         <View style={styles.tipCard}>
           <View style={styles.tipHeader}>
-<<<<<<< HEAD
-            <View style={styles.iconWrapper}>
-              <Image source={MoodDepression} style={styles.tipIcon} />
-            </View>
-=======
             <Image source={MoodDepression} style={styles.tipIcon} />
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
             <Text style={styles.tipLabelMood}>Mood</Text>
             <Text style={styles.tipTitle}>Tips Meningkatkan Mood Harian</Text>
           </View>
           <Text style={styles.tipDesc}>
-<<<<<<< HEAD
-            Mulai hari dengan gratitude journal, lakukan aktivitas fisik ringan,
-            dan habiskan waktu di alam atau dengan orang tersayang.
-=======
             Mulai hari dengan gratitude journal, lakukan aktivitas fisik ringan, dan habiskan waktu di alam atau dengan orang tersayang.
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
           </Text>
         </View>
       </ScrollView>
@@ -198,27 +119,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 6,
   },
-<<<<<<< HEAD
-  iconWrapper: {
-    width: 37,
-    height: 37,
-    borderRadius: 12,
-    backgroundColor: '#E8EDFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 8,
-  },
-  tipIcon: {
-    width: 28,
-    height: 28,
-    resizeMode: 'contain',
-=======
   tipIcon: {
     width: 22,
     height: 22,
     resizeMode: 'contain',
     marginRight: 8,
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
     tintColor: '#5B6BF7',
   },
   tipLabelStres: {
@@ -280,8 +185,4 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginLeft: 30,
   },
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253

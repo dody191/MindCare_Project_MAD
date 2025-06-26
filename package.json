@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "AwesomeProject",
-=======
-  "name": "RubennProject",
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -15,7 +11,6 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.24.0",
-<<<<<<< HEAD
     "@react-navigation/elements": "^2.5.1",
     "@react-navigation/native": "^7.1.14",
     "@react-navigation/native-stack": "^7.3.20",
@@ -25,25 +20,12 @@
     "react": "18.3.1",
     "react-native": "0.77.0",
     "react-native-flash-message": "^0.4.2",
-=======
-    "@react-navigation/native": "^7.1.14",
-    "@react-navigation/native-stack": "^7.3.21",
-    "@react-navigation/stack": "^7.3.6",
-    "axios": "^1.10.0",
-    "firebase": "^11.9.1",
-    "react": "18.3.1",
-    "react-native": "0.77.0",
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
     "react-native-gesture-handler": "^2.26.0",
     "react-native-image-picker": "^8.2.1",
     "react-native-safe-area-context": "^5.5.0",
     "react-native-screens": "^4.11.1",
-<<<<<<< HEAD
     "react-native-svg": "^15.12.0",
     "react-native-vector-icons": "^10.2.0"
-=======
-    "react-native-svg": "^15.12.0"
->>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
