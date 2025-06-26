@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+<<<<<<< HEAD
 import {
   StyleSheet,
   Text,
@@ -18,6 +19,15 @@ const EyeIcon = ({visible}: {visible: boolean}) => (
         ? require('../../assets/eye-open.png')
         : require('../../assets/eye.png')
     }
+=======
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
+import MindCare from '../../assets/mindcare.png';
+import { ArrowBack } from '../../assets';
+
+const EyeIcon = ({visible}: {visible: boolean}) => (
+  <Image
+    source={require('../../assets/eye.png')}
+>>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
     style={{width: 17, height: 17, tintColor: '#737B86'}}
   />
 );
@@ -30,6 +40,7 @@ const SignUp = ({navigation}) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+<<<<<<< HEAD
   const handleSignUp = () => {
     if (!name || !email || !password || !confirmPassword) {
       Alert.alert('Error', 'Semua field harus diisi.');
@@ -48,6 +59,11 @@ const SignUp = ({navigation}) => {
       <TouchableOpacity
         style={styles.backButton}
         onPress={() => navigation.goBack()}>
+=======
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+>>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
         <ArrowBack width={23} height={34} />
       </TouchableOpacity>
       <View style={styles.logoWrapper}>
@@ -114,7 +130,12 @@ const SignUp = ({navigation}) => {
       <TouchableOpacity
         style={styles.customButton}
         activeOpacity={0.7}
+<<<<<<< HEAD
         onPress={handleSignUp}>
+=======
+        onPress={() => {/* TODO: handle sign up or navigate */}}
+      >
+>>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
         <Text style={styles.customButtonText}>Daftar</Text>
       </TouchableOpacity>
     </View>
@@ -222,4 +243,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontFamily: 'Poppins-SemiBold',
   },
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253

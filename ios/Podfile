@@ -14,7 +14,11 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
+<<<<<<< HEAD
 target 'AwesomeProject' do
+=======
+target 'RubennProject' do
+>>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
   config = use_native_modules!
 
   use_react_native!(

@@ -24,4 +24,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253

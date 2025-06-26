@@ -220,6 +220,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Poppins-Bold',
   },
+<<<<<<< HEAD
   headerBox: {
     width: 390,
     height: 81,
@@ -233,3 +234,6 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0)',
   },
 });
+=======
+});
+>>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253

@@ -1,13 +1,20 @@
 import React from 'react';
+<<<<<<< HEAD
 import {StyleSheet, View, Text, Image} from 'react-native';
 import DummyPhoto from '../../assets/dummyPhoto.png';
 import {Button} from '../../components/atoms';
+=======
+import { StyleSheet, View, Text, Image } from 'react-native';
+import { NullPhoto, Pic } from '../../assets';
+import { Button } from '../../components/atoms';
+>>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
 
 const Home = () => {
   return (
     <View style={styles.pageContainer}>
       {/* Header Section */}
       <View style={styles.headerRow}>
+<<<<<<< HEAD
         <View style={{flex: 1}}>
           <Text style={styles.greeting}>Hi, John Doe</Text>
           <Text style={styles.subtitle}>Have you track your money today?</Text>
@@ -17,6 +24,17 @@ const Home = () => {
 
       {/* Spacer */}
       <View style={{height: 16}} />
+=======
+        <View style={{ flex: 1 }}>
+          <Text style={styles.greeting}>Hi, John Doe</Text>
+          <Text style={styles.subtitle}>Have you track your money today?</Text>
+        </View>
+        <Image source={Pic} style={styles.profileImage} />
+      </View>
+
+      {/* Spacer */}
+      <View style={{ height: 16 }} />
+>>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
 
       {/* Balance Section */}
       <View style={styles.sectionBox}>
@@ -28,22 +46,38 @@ const Home = () => {
           <Text style={styles.value}>Rp. 4.000.000</Text>
         </View>
         <View style={styles.rowBetween}>
+<<<<<<< HEAD
           <Text style={styles.label}>Cash on Bank</Text>
+=======
+          <Text style={styles.label}>Cash on  Bank</Text>
+>>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
           <Text style={styles.value}>Rp. 6.000.000</Text>
         </View>
       </View>
 
       {/* Spacer */}
+<<<<<<< HEAD
       <View style={{height: 16}} />
+=======
+      <View style={{ height: 16 }} />
+>>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
 
       {/* Add Transaction Section */}
       <View style={styles.sectionBox}>
         <Text style={styles.sectionTitle}>Add Transaction</Text>
+<<<<<<< HEAD
         <View style={{height: 16}} />
         <Button text="Cash On Hand" color="#02CF8E" buttonColor="#000" />
         <View style={{height: 16}} />
         <Button text="Cash On Bank" color="#02CF8E" buttonColor="#000" />
         <View style={{height: 8}} />
+=======
+        <View style={{ height: 16 }} />
+        <Button text="Cash On Hand" color="#02CF8E" buttonColor="#000" />
+        <View style={{ height: 16 }} />
+        <Button text="Cash On Bank" color="#02CF8E" buttonColor="#000" />
+        <View style={{ height: 8 }} />
+>>>>>>> e1b78907268f9a436b266594caae8ac2da0a0253
       </View>
     </View>
   );
