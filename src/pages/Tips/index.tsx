@@ -1,23 +1,33 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from 'react-native';
 import ArrowBack from '../../assets/arrow-back.svg';
 import Light from '../../assets/Light.png';
 import DeliveryTime from '../../assets/DeliveryTime.png';
 import HandDrawnStar from '../../assets/HandDrawnStar.png';
 import MoodDepression from '../../assets/MoodDepression.png';
 
-const Tips = ({ navigation }) => {
+const Tips = ({navigation}) => {
   return (
     <View style={styles.pageContainer}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backBtn}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.backBtn}>
           <ArrowBack width={24} height={24} />
         </TouchableOpacity>
         <View style={{flex: 1}}>
           <Text style={styles.headerTitle}>Tips Kesehatan Mental</Text>
           <Text style={styles.headerSubtitle}>
-            Kumpulan tips dan panduan untuk menjaga kesehatan mental Anda setiap hari.
+            Kumpulan tips dan panduan untuk menjaga kesehatan mental Anda setiap
+            hari.
           </Text>
         </View>
       </View>
@@ -25,45 +35,63 @@ const Tips = ({ navigation }) => {
         {/* Card 1 */}
         <View style={styles.tipCard}>
           <View style={styles.tipHeader}>
-            <Image source={Light} style={styles.tipIcon} />
+            <View style={styles.iconWrapper}>
+              <Image source={Light} style={styles.tipIcon} />
+            </View>
             <Text style={styles.tipLabelStres}>Stres</Text>
-            <Text style={styles.tipTitle}>Teknik Pernapasan untuk Mengurangi Stress</Text>
+            <Text style={styles.tipTitle}>
+              Teknik Pernapasan untuk Mengurangi Stress
+            </Text>
           </View>
           <Text style={styles.tipDesc}>
-            Cobalah teknik pernapasan 4-7-8: Tarik napas selama 4 detik, tahan selama 7 detik, dan hembuskan selama 8 detik. Ulangi 3-4 kali.
+            Cobalah teknik pernapasan 4-7-8: Tarik napas selama 4 detik, tahan
+            selama 7 detik, dan hembuskan selama 8 detik. Ulangi 3-4 kali.
           </Text>
         </View>
         {/* Card 2 */}
         <View style={styles.tipCard}>
           <View style={styles.tipHeader}>
-            <Image source={DeliveryTime} style={styles.tipIcon} />
+            <View style={styles.iconWrapper}>
+              <Image source={DeliveryTime} style={styles.tipIcon} />
+            </View>
             <Text style={styles.tipLabelTidur}>Tidur</Text>
-            <Text style={styles.tipTitle}>Cara Membangun Runitas Tidur yang Sehat</Text>
+            <Text style={styles.tipTitle}>
+              Cara Membangun Runitas Tidur yang Sehat
+            </Text>
           </View>
           <Text style={styles.tipDesc}>
-            Tidur dan bangun pada waktu yang sama setiap hari. Hindari layar 1 jam sebelum tidur dan ciptakan lingkungan yang tenang
+            Tidur dan bangun pada waktu yang sama setiap hari. Hindari layar 1
+            jam sebelum tidur dan ciptakan lingkungan yang tenang
           </Text>
         </View>
         {/* Card 3 */}
         <View style={styles.tipCard}>
           <View style={styles.tipHeader}>
-            <Image source={HandDrawnStar} style={styles.tipIcon} />
+            <View style={styles.iconWrapper}>
+              <Image source={HandDrawnStar} style={styles.tipIcon} />
+            </View>
             <Text style={styles.tipLabelKecemasan}>Kecemasan</Text>
-            <Text style={styles.tipTitle}>Mengelola Kecemasan dengan Mindfulness</Text>
+            <Text style={styles.tipTitle}>
+              Mengelola Kecemasan dengan Mindfulness
+            </Text>
           </View>
           <Text style={styles.tipDesc}>
-            Praktikkan mindfulness dengan fokus pada saat ini. Perhatikan napas, sensasi tubuh, dan pikiran tanpa menghakimi.
+            Praktikkan mindfulness dengan fokus pada saat ini. Perhatikan napas,
+            sensasi tubuh, dan pikiran tanpa menghakimi.
           </Text>
         </View>
         {/* Card 4 */}
         <View style={styles.tipCard}>
           <View style={styles.tipHeader}>
-            <Image source={MoodDepression} style={styles.tipIcon} />
+            <View style={styles.iconWrapper}>
+              <Image source={MoodDepression} style={styles.tipIcon} />
+            </View>
             <Text style={styles.tipLabelMood}>Mood</Text>
             <Text style={styles.tipTitle}>Tips Meningkatkan Mood Harian</Text>
           </View>
           <Text style={styles.tipDesc}>
-            Mulai hari dengan gratitude journal, lakukan aktivitas fisik ringan, dan habiskan waktu di alam atau dengan orang tersayang.
+            Mulai hari dengan gratitude journal, lakukan aktivitas fisik ringan,
+            dan habiskan waktu di alam atau dengan orang tersayang.
           </Text>
         </View>
       </ScrollView>
@@ -119,11 +147,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 6,
   },
-  tipIcon: {
-    width: 22,
-    height: 22,
-    resizeMode: 'contain',
+  iconWrapper: {
+    width: 37,
+    height: 37,
+    borderRadius: 12,
+    backgroundColor: '#E8EDFF',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginRight: 8,
+  },
+  tipIcon: {
+    width: 28,
+    height: 28,
+    resizeMode: 'contain',
     tintColor: '#5B6BF7',
   },
   tipLabelStres: {

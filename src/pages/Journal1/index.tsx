@@ -23,12 +23,14 @@ const Journal1 = ({navigation}) => {
           <ArrowBack width={24} height={24} />
         </TouchableOpacity>
         <View style={styles.headerLeft}>
-          <Image source={MindCareLogo} style={styles.logo} />
+          <View style={styles.logoCircle}>
+            <Image source={MindCareLogo} style={styles.logo} />
+          </View>
           <Text style={styles.logoText}>MindCare</Text>
         </View>
         <TouchableOpacity
           style={styles.addBtn}
-          onPress={() => navigation.navigate('JournalWrite')}>
+          onPress={() => navigation.navigate('Journal2')}>
           <Image source={PlusMath} style={styles.addIcon} />
           <Text style={styles.addBtnText}>Tulis Jurnal</Text>
         </TouchableOpacity>
@@ -111,16 +113,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   logo: {
-    width: 28,
-    height: 28,
+    width: 35,
+    height: 35,
     resizeMode: 'contain',
-    marginRight: 6,
   },
   logoText: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#1746FF',
     fontFamily: 'Poppins-Bold',
+    marginLeft: 8,
   },
   addBtn: {
     flexDirection: 'row',
@@ -136,6 +138,7 @@ const styles = StyleSheet.create({
     height: 16,
     resizeMode: 'contain',
     marginRight: 8,
+    tintColor: '#fff',
   },
   addBtnText: {
     color: '#fff',

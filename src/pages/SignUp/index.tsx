@@ -1,81 +1,122 @@
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  Image,
-  TouchableOpacity,
   TextInput,
+  TouchableOpacity,
+  Image,
+  Alert,
 } from 'react-native';
-import React, {useState} from 'react';
 import MindCare from '../../assets/mindcare.png';
-import IconEye from '../../assets/eye.png';
+import ArrowBack from '../../assets/arrow-back.svg';
+
+const EyeIcon = ({visible}: {visible: boolean}) => (
+  <Image
+    source={
+      visible
+        ? require('../../assets/eye-open.png')
+        : require('../../assets/eye.png')
+    }
+    style={{width: 17, height: 17, tintColor: '#737B86'}}
+  />
+);
 
 const SignUp = ({navigation}) => {
-  const [secure, setSecure] = useState(true);
-  const [secureConfirm, setSecureConfirm] = useState(true);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleSignUp = () => {
+    if (!name || !email || !password || !confirmPassword) {
+      Alert.alert('Error', 'Semua field harus diisi.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      Alert.alert('Error', 'Password dan konfirmasi password tidak sama.');
+      return;
+    }
+    // TODO: Tambahkan logika pendaftaran ke backend di sini
+    Alert.alert('Sukses', 'Akun berhasil dibuat!');
+  };
 
   return (
-    <View style={styles.pageContainer}>
-      {/* Header Back */}
+    <View style={styles.container}>
       <TouchableOpacity
         style={styles.backButton}
         onPress={() => navigation.goBack()}>
-        <Text style={styles.backIcon}>{'<'}</Text>
+        <ArrowBack width={23} height={34} />
       </TouchableOpacity>
-      {/* Logo & Title */}
       <View style={styles.logoWrapper}>
         <Image source={MindCare} style={styles.logo} />
       </View>
-      <Text style={styles.title}>MindCare</Text>
       <Text style={styles.subtitle}>Buat akun baru</Text>
-      {/* Form */}
-      <View style={styles.contentContainer}>
+      <View style={{height: 32}} />
+      <View style={styles.inputBlock}>
         <Text style={styles.label}>Nama Lengkap</Text>
         <TextInput
-          placeholder="Masukkan nama lengkap Anda"
           style={styles.input}
-          placeholderTextColor="#8D92A3"
+          placeholder="Masukkan nama lengkap Anda"
+          placeholderTextColor="rgba(0,0,0,0.7)"
+          value={name}
+          onChangeText={setName}
         />
-        <View style={{height: 16}} />
+      </View>
+      <View style={styles.inputBlock}>
         <Text style={styles.label}>Email</Text>
         <TextInput
-          placeholder="Masukkan email Anda"
           style={styles.input}
-          placeholderTextColor="#8D92A3"
+          placeholder="Masukkan email Anda"
+          placeholderTextColor="rgba(0,0,0,0.7)"
+          value={email}
+          onChangeText={setEmail}
         />
-        <View style={{height: 16}} />
+      </View>
+      <View style={styles.inputBlock}>
         <Text style={styles.label}>Password</Text>
         <View style={styles.passwordWrapper}>
           <TextInput
+            style={styles.inputPassword}
             placeholder="Masukkan password Anda"
-            secureTextEntry={secure}
-            style={styles.passwordInput}
-            placeholderTextColor="#8D92A3"
+            placeholderTextColor="rgba(0,0,0,0.7)"
+            secureTextEntry={!showPassword}
+            value={password}
+            onChangeText={setPassword}
           />
-          <TouchableOpacity onPress={() => setSecure(!secure)}>
-            <Image source={IconEye} style={styles.eyeIcon} />
+          <TouchableOpacity
+            style={styles.eyeButton}
+            onPress={() => setShowPassword(!showPassword)}>
+            <EyeIcon visible={showPassword} />
           </TouchableOpacity>
         </View>
-        <View style={{height: 16}} />
+      </View>
+      <View style={styles.inputBlock}>
         <Text style={styles.label}>Konfirmasi Password</Text>
         <View style={styles.passwordWrapper}>
           <TextInput
+            style={styles.inputPassword}
             placeholder="Konfirmasi password Anda"
-            secureTextEntry={secureConfirm}
-            style={styles.passwordInput}
-            placeholderTextColor="#8D92A3"
+            placeholderTextColor="rgba(0,0,0,0.7)"
+            secureTextEntry={!showConfirmPassword}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
           />
-          <TouchableOpacity onPress={() => setSecureConfirm(!secureConfirm)}>
-            <Image source={IconEye} style={styles.eyeIcon} />
+          <TouchableOpacity
+            style={styles.eyeButton}
+            onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+            <EyeIcon visible={showConfirmPassword} />
           </TouchableOpacity>
         </View>
-        <View style={{height: 32}} />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.replace('Dashboard')}>
-          <Text style={styles.buttonText}>Daftar</Text>
-        </TouchableOpacity>
       </View>
+      <TouchableOpacity
+        style={styles.customButton}
+        activeOpacity={0.7}
+        onPress={handleSignUp}>
+        <Text style={styles.customButtonText}>Daftar</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -83,118 +124,102 @@ const SignUp = ({navigation}) => {
 export default SignUp;
 
 const styles = StyleSheet.create({
-  pageContainer: {
+  container: {
     flex: 1,
     backgroundColor: '#fff',
-    borderRadius: 24,
-    overflow: 'hidden',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingTop: 24,
   },
   backButton: {
     position: 'absolute',
-    top: 24,
     left: 16,
-    zIndex: 10,
-    width: 32,
-    height: 32,
+    top: 16,
+    zIndex: 2,
+    padding: 0,
+    width: 23,
+    height: 34,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  backIcon: {
-    fontSize: 28,
-    color: '#222',
-    fontWeight: 'bold',
   },
   logoWrapper: {
-    backgroundColor: '#5B6BF7',
-    borderRadius: 100,
-    width: 100,
-    height: 100,
-    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 8,
     alignItems: 'center',
-    alignSelf: 'center',
-    marginTop: 56,
-    marginBottom: 16,
+    justifyContent: 'center',
   },
   logo: {
-    width: 60,
-    height: 60,
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    borderWidth: 1,
+    borderColor: '#9095F8',
     resizeMode: 'contain',
   },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#5B6BF7',
-    textAlign: 'center',
-    fontFamily: 'Poppins-Bold',
-  },
   subtitle: {
-    fontSize: 14,
-    color: '#8D92A3',
-    textAlign: 'center',
-    marginBottom: 32,
+    fontSize: 16,
+    color: '#737B86',
     fontFamily: 'Poppins-Regular',
+    marginTop: 16,
+    marginBottom: 24,
+    textAlign: 'center',
   },
-  contentContainer: {
-    flex: 1,
-    marginHorizontal: 24,
-    marginTop: 0,
+  inputBlock: {
+    width: '100%',
+    marginBottom: 16,
   },
   label: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#000',
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#021317',
+    fontFamily: 'Poppins-SemiBold',
     marginBottom: 8,
-    fontFamily: 'Poppins-Bold',
   },
   input: {
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255,255,255,0.08)',
     borderWidth: 1,
-    borderColor: '#E5E5E5',
+    borderColor: '#E2E8F0',
     borderRadius: 10,
-    paddingHorizontal: 16,
+    paddingHorizontal: 13,
     paddingVertical: 12,
-    fontSize: 14,
+    fontSize: 12,
     color: '#000',
     fontFamily: 'Poppins-Regular',
   },
   passwordWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255,255,255,0.08)',
     borderWidth: 1,
-    borderColor: '#E5E5E5',
+    borderColor: '#E2E8F0',
     borderRadius: 10,
-    paddingHorizontal: 16,
+    paddingHorizontal: 13,
     height: 48,
   },
-  passwordInput: {
+  inputPassword: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 12,
     color: '#000',
     fontFamily: 'Poppins-Regular',
-    paddingVertical: 0,
-    paddingHorizontal: 0,
-    backgroundColor: 'transparent',
-    borderWidth: 0,
   },
-  eyeIcon: {
-    width: 24,
-    height: 24,
-    tintColor: '#8D92A3',
-    marginLeft: 8,
-  },
-  button: {
-    backgroundColor: '#5B6BF7',
-    borderRadius: 10,
-    height: 48,
+  eyeButton: {
+    padding: 4,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 8,
   },
-  buttonText: {
+  customButton: {
+    backgroundColor: '#535BE9',
+    borderRadius: 10,
+    height: 43,
+    width: 318,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 32,
+  },
+  customButtonText: {
     color: '#fff',
     fontSize: 18,
-    fontWeight: 'bold',
-    fontFamily: 'Poppins-Bold',
+    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
   },
 });

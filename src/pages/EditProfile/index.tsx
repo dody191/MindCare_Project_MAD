@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import ArrowBack from '../../assets/arrow-back.svg';
 import IconProfile from '../../assets/iconprofile.png';
 import IconCalendar from '../../assets/iconcalendar.png';
@@ -10,7 +17,7 @@ import HomeAddress from '../../assets/homeaddress.png';
 import IconLocation from '../../assets/iconlocation.png';
 import Save from '../../assets/Save.png';
 
-const EditProfile = ({ navigation }) => {
+const EditProfile = ({navigation}) => {
   const [name, setName] = useState('John Doe');
   const [birth, setBirth] = useState('15/1/1990');
   const [email, setEmail] = useState('Johndoe@gmail.com');
@@ -21,13 +28,16 @@ const EditProfile = ({ navigation }) => {
     <View style={styles.pageContainer}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backBtn}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.backBtn}>
           <ArrowBack width={24} height={24} />
         </TouchableOpacity>
         <Image source={IconProfile} style={styles.profileIcon} />
-        <View style={{ flex: 1, marginLeft: 8 }}>
+        <View style={{flex: 1, marginLeft: 8}}>
           <Text style={styles.profileName}>John Doe</Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 2 }}>
+          <View
+            style={{flexDirection: 'row', alignItems: 'center', marginTop: 2}}>
             <Image source={IconCalendar} style={styles.calendarIcon} />
             <Text style={styles.memberText}>Member sejak 1/1/2024</Text>
           </View>
@@ -54,9 +64,10 @@ const EditProfile = ({ navigation }) => {
             placeholder="Nama Lengkap"
             placeholderTextColor="#8D92A3"
           />
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
+          <View
+            style={{flexDirection: 'row', alignItems: 'center', marginTop: 8}}>
             <Image source={IconCalendar} style={styles.infoIcon} />
-            <Text style={styles.labelLink}>Tanggal Lahir</Text>
+            <Text style={styles.label}>Tanggal Lahir</Text>
           </View>
           <TextInput
             style={styles.input}
@@ -73,7 +84,8 @@ const EditProfile = ({ navigation }) => {
             <Image source={IconContact} style={styles.sectionIcon} />
             <Text style={styles.sectionTitle}>Informasi Kontak</Text>
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
+          <View
+            style={{flexDirection: 'row', alignItems: 'center', marginTop: 8}}>
             <Image source={IconMail} style={styles.infoIcon} />
             <Text style={styles.label}>Email</Text>
           </View>
@@ -85,7 +97,8 @@ const EditProfile = ({ navigation }) => {
             placeholderTextColor="#8D92A3"
             keyboardType="email-address"
           />
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
+          <View
+            style={{flexDirection: 'row', alignItems: 'center', marginTop: 8}}>
             <Image source={IconPhone} style={styles.infoIcon} />
             <Text style={styles.label}>Nomor Telepon</Text>
           </View>
@@ -105,7 +118,8 @@ const EditProfile = ({ navigation }) => {
             <Image source={HomeAddress} style={styles.sectionIcon} />
             <Text style={styles.sectionTitle}>Informasi Alamat</Text>
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
+          <View
+            style={{flexDirection: 'row', alignItems: 'center', marginTop: 8}}>
             <Image source={IconLocation} style={styles.infoIcon} />
             <Text style={styles.label}>Alamat</Text>
           </View>
@@ -174,8 +188,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   saveIcon: {
-    width: 18,
-    height: 18,
+    width: 22,
+    height: 22,
     resizeMode: 'contain',
     marginRight: 8,
   },
@@ -202,8 +216,8 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   sectionIcon: {
-    width: 22,
-    height: 22,
+    width: 30,
+    height: 30,
     tintColor: '#1746FF',
     marginRight: 8,
     resizeMode: 'contain',
@@ -219,13 +233,6 @@ const styles = StyleSheet.create({
     color: '#222',
     fontFamily: 'Poppins-Bold',
     marginTop: 8,
-  },
-  labelLink: {
-    fontSize: 14,
-    color: '#1746FF',
-    fontFamily: 'Poppins-Bold',
-    marginLeft: 4,
-    textDecorationLine: 'underline',
   },
   input: {
     backgroundColor: '#fff',
@@ -248,8 +255,8 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   infoIcon: {
-    width: 20,
-    height: 20,
+    width: 30,
+    height: 30,
     resizeMode: 'contain',
     marginRight: 8,
     marginLeft: 0,

@@ -220,4 +220,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Poppins-Bold',
   },
+  headerBox: {
+    width: 390,
+    height: 81,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 4, // Untuk Android
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0)',
+  },
 });
