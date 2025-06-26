@@ -5,7 +5,11 @@ import MindCare from '../../assets/mindcare.png';
 
 const EyeIcon = ({visible}: {visible: boolean}) => (
   <Image
-    source={visible ? require('../../assets/eye.png') : require('../../assets/eye.png')}
+    source={
+      visible
+        ? require('../../assets/eye-open.png')
+        : require('../../assets/eye.png')
+    }
     style={{width: 17, height: 17, tintColor: '#737B86'}}
   />
 );
@@ -17,17 +21,31 @@ const SignIn = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
+  const [resetPasswordVisible, setResetPasswordVisible] = useState(false);
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSendReset = () => {
     setModalVisible(false);
     setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 2000);
+    setTimeout(() => {
+      setShowSuccess(false);
+      setResetPasswordVisible(true);
+    }, 1000);
+  };
+
+  const handleResetPassword = () => {
+    // Tambahkan validasi password jika perlu
+    setResetPasswordVisible(false);
+    // Lakukan aksi reset password di sini
   };
 
   return (
     <View style={styles.container}>
       {/* Success Banner */}
-      {showSuccess && (
+      {showSuccess && !resetPasswordVisible && (
         <View style={styles.successBanner}>
           <Text style={styles.successText}>Link Berhasil di kirim!</Text>
         </View>
@@ -37,8 +55,7 @@ const SignIn = ({navigation}) => {
         visible={modalVisible}
         transparent
         animationType="fade"
-        onRequestClose={() => setModalVisible(false)}
-      >
+        onRequestClose={() => setModalVisible(false)}>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
@@ -58,8 +75,66 @@ const SignIn = ({navigation}) => {
             <Text style={styles.modalSubtitle}>
               Kami akan mengirimkan link reset password ke email Anda.
             </Text>
-            <TouchableOpacity style={styles.customButton} activeOpacity={0.7} onPress={handleSendReset}>
+            <TouchableOpacity
+              style={styles.customButton}
+              activeOpacity={0.7}
+              onPress={handleSendReset}>
               <Text style={styles.customButtonText}>Kirim Link Reset</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+      {/* Modal Reset Password */}
+      <Modal
+        visible={resetPasswordVisible}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setResetPasswordVisible(false)}>
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Reset Password</Text>
+              <TouchableOpacity onPress={() => setResetPasswordVisible(false)}>
+                <Text style={styles.closeButton}>×</Text>
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.label}>Password baru</Text>
+            <View style={styles.passwordWrapper}>
+              <TextInput
+                style={styles.inputPassword}
+                placeholder="Masukkan password baru"
+                placeholderTextColor="rgba(0,0,0,0.7)"
+                secureTextEntry={!showNewPassword}
+                value={newPassword}
+                onChangeText={setNewPassword}
+              />
+              <TouchableOpacity
+                style={styles.eyeButton}
+                onPress={() => setShowNewPassword(!showNewPassword)}>
+                <EyeIcon visible={showNewPassword} />
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.label}>Konfirmasi password baru</Text>
+            <View style={styles.passwordWrapper}>
+              <TextInput
+                style={styles.inputPassword}
+                placeholder="Konfirmasi password baru"
+                placeholderTextColor="rgba(0,0,0,0.7)"
+                secureTextEntry={!showConfirmPassword}
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+              />
+              <TouchableOpacity
+                style={styles.eyeButton}
+                onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+                <EyeIcon visible={showConfirmPassword} />
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              style={styles.resetButton}
+              activeOpacity={0.7}
+              onPress={handleResetPassword}>
+              <Text style={styles.resetButtonText}>Reset Password</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -99,7 +174,9 @@ const SignIn = ({navigation}) => {
             <EyeIcon visible={showPassword} />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.forgotWrapper} onPress={() => setModalVisible(true)}>
+        <TouchableOpacity
+          style={styles.forgotWrapper}
+          onPress={() => setModalVisible(true)}>
           <Text style={styles.forgot}>Lupa password?</Text>
         </TouchableOpacity>
       </View>
@@ -107,8 +184,7 @@ const SignIn = ({navigation}) => {
       <TouchableOpacity
         style={styles.customButton}
         activeOpacity={0.7}
-        onPress={() => navigation.navigate('Dashboard')}
-      >
+        onPress={() => navigation.navigate('Dashboard')}>
         <Text style={styles.customButtonText}>Masuk</Text>
       </TouchableOpacity>
       <View style={styles.signupWrapper}>
@@ -319,5 +395,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     overflow: 'hidden',
     minWidth: 300,
+  },
+  resetButton: {
+    backgroundColor: '#535BE9',
+    borderRadius: 10,
+    height: 40,
+    width: 270,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginTop: 16,
+  },
+  resetButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
   },
 });
