@@ -32,7 +32,7 @@ const Dashboard = ({navigation}) => {
       <View style={styles.dashboardCard}>
         <Text style={styles.dashboardTitle}>Dashboard</Text>
         <Text style={styles.dashboardDesc}>
-          Selamat Datang di MindCare. Kesehatan Mental{'\n'}
+          Selamat Datang di MindCare. Kesehatan Mental{"\n"}
           Adalah Prioritas utama.
         </Text>
       </View>
@@ -238,4 +238,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Poppins-Bold',
   },
-});
+}); 

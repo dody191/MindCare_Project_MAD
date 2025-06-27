@@ -1,0 +1,18 @@
+# GitHub Linguist configuration
+# This file tells GitHub how to classify languages in your repository
+
+# Override language detection for specific file extensions
+*.tsx linguist-language=JavaScript
+*.ts linguist-language=JavaScript
+
+# Exclude files from language statistics
+# linguist-vendored: Files that are vendored or generated
+# linguist-generated: Files that are generated
+# linguist-documentation: Documentation files
+# linguist-detectable: Force detection of language
+
+# Mark TypeScript files as JavaScript for statistics
+src/**/*.tsx linguist-language=JavaScript
+src/**/*.ts linguist-language=JavaScript
+components/**/*.tsx linguist-language=JavaScript
+components/**/*.ts linguist-language=JavaScript 
