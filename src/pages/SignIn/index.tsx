@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Modal} from 'react-native';
 import Button from '../../components/atoms/Button';
 import MindCare from '../../assets/mindcare.png';
+import app from '../../config/firebase';
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 
 const EyeIcon = ({visible}: {visible: boolean}) => (
   <Image
@@ -26,20 +28,43 @@ const SignIn = ({navigation}) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [resetError, setResetError] = useState('');
+  const [resetSuccess, setResetSuccess] = useState('');
 
-  const handleSendReset = () => {
-    setModalVisible(false);
-    setShowSuccess(true);
-    setTimeout(() => {
-      setShowSuccess(false);
-      setResetPasswordVisible(true);
-    }, 1000);
+  const handleSendReset = async () => {
+    setResetError('');
+    setResetSuccess('');
+    const auth = getAuth(app);
+    if (!resetEmail) {
+      setResetError('Email harus diisi!');
+      return;
+    }
+    try {
+      await sendPasswordResetEmail(auth, resetEmail);
+      setModalVisible(false);
+      setResetSuccess('Link reset password berhasil dikirim ke email!');
+      setTimeout(() => setResetSuccess(''), 3000);
+    } catch (err) {
+      setResetError('Gagal mengirim email reset. Pastikan email benar.');
+    }
   };
 
   const handleResetPassword = () => {
     // Tambahkan validasi password jika perlu
     setResetPasswordVisible(false);
     // Lakukan aksi reset password di sini
+  };
+
+  const handleSignIn = async () => {
+    setError('');
+    const auth = getAuth(app);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigation.navigate('Dashboard');
+    } catch (err) {
+      setError('Email atau password salah!');
+    }
   };
 
   return (
@@ -75,6 +100,9 @@ const SignIn = ({navigation}) => {
             <Text style={styles.modalSubtitle}>
               Kami akan mengirimkan link reset password ke email Anda.
             </Text>
+            {resetError ? (
+              <Text style={{ color: 'red', textAlign: 'center', marginBottom: 8 }}>{resetError}</Text>
+            ) : null}
             <TouchableOpacity
               style={styles.customButton}
               activeOpacity={0.7}
@@ -84,6 +112,12 @@ const SignIn = ({navigation}) => {
           </View>
         </View>
       </Modal>
+      {/* Notifikasi sukses reset password */}
+      {resetSuccess ? (
+        <View style={styles.successBanner}>
+          <Text style={styles.successText}>{resetSuccess}</Text>
+        </View>
+      ) : null}
       {/* Modal Reset Password */}
       <Modal
         visible={resetPasswordVisible}
@@ -181,10 +215,13 @@ const SignIn = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View style={{height: 32}} />
+      {error ? (
+        <Text style={{ color: 'red', textAlign: 'center', marginBottom: 8 }}>{error}</Text>
+      ) : null}
       <TouchableOpacity
         style={styles.customButton}
         activeOpacity={0.7}
-        onPress={() => navigation.navigate('Dashboard')}>
+        onPress={handleSignIn}>
         <Text style={styles.customButtonText}>Masuk</Text>
       </TouchableOpacity>
       <View style={styles.signupWrapper}>

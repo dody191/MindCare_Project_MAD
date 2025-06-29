@@ -1,28 +1,10 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
-  Alert,
-  Modal,
-  FlatList,
-} from 'react-native';
+import {StyleSheet,View,Text,Image,TouchableOpacity,TextInput,ScrollView,Alert,Modal,FlatList,} from 'react-native';
 import MindCareLogo from '../../assets/mindcare.png';
 import ArrowBack from '../../assets/arrow-back.svg';
 import EditJournal from '../../assets/editjournal.png';
 
-const feelingsList = [
-  'Senang',
-  'Sedih',
-  'Marah',
-  'Takut',
-  'Cemas',
-  'Bersyukur',
-];
+const feelingsList = ['Senang','Sedih','Marah','Takut','Cemas','Bersyukur',];
 
 const Journal2 = ({navigation}) => {
   const [title, setTitle] = useState('');

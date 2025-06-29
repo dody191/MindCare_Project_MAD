@@ -1,25 +1,22 @@
 // Import the functions you need from the SDKs you need
-import {initializeApp} from 'firebase/app';
-import {initializeAuth, getReactNativePersistence} from 'firebase/auth';
-import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyCS3-GgVXLYJ7lw6Y1AgZBT-Su2JbbRI5g',
-  authDomain: 'mtdemosummer2025.firebaseapp.com',
-  projectId: 'mtdemosummer2025',
-  storageBucket: 'mtdemosummer2025.firebasestorage.app',
-  messagingSenderId: '374250257604',
-  appId: '1:374250257604:web:1937864ec1e942ceaa1d91',
-  databaseURL: 'https://mindcareprojectmad2025-default-rtdb.firebaseio.com/',
+  apiKey: "AIzaSyAdxs7aME2Tx1EVxCPFjf7LNMMW3GEmY_U",
+  authDomain: "mindcare-d940e.firebaseapp.com",
+  projectId: "mindcare-d940e",
+  storageBucket: "mindcare-d940e.firebasestorage.app",
+  messagingSenderId: "334034603054",
+  appId: "1:334034603054:web:b92ddd4558ae446dfd23bf",
+  measurementId: "G-DY0B3G45FT"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-initializeAuth(app, {
-  persistence: getReactNativePersistence(ReactNativeAsyncStorage),
-});
-
+const analytics = getAnalytics(app);
 export default app;

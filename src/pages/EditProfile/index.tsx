@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
+import {StyleSheet,View,Text,Image,TouchableOpacity,TextInput,} from 'react-native';
 import ArrowBack from '../../assets/arrow-back.svg';
 import IconProfile from '../../assets/iconprofile.png';
 import IconCalendar from '../../assets/iconcalendar.png';
