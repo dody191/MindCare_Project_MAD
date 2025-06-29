@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import {StyleSheet,View,Text,Image,TouchableOpacity,ScrollView,} from 'react-native';
 import ArrowBack from '../../assets/arrow-back.svg';
 import MindCareLogo from '../../assets/mindcare.png';
 import PlusMath from '../../assets/PlusMath.png';

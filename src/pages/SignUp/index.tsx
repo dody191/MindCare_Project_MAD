@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import MindCare from '../../assets/mindcare.png';
 import ArrowBack from '../../assets/arrow-back.svg';
+import app from '../../config/firebase';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const EyeIcon = ({visible}: {visible: boolean}) => (
   <Image
@@ -29,18 +31,28 @@ const SignUp = ({navigation}) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
+    setError('');
+    setSuccess('');
     if (!name || !email || !password || !confirmPassword) {
-      Alert.alert('Error', 'Semua field harus diisi.');
+      setError('Semua field harus diisi.');
       return;
     }
     if (password !== confirmPassword) {
-      Alert.alert('Error', 'Password dan konfirmasi password tidak sama.');
+      setError('Password dan konfirmasi password tidak sama.');
       return;
     }
-    // TODO: Tambahkan logika pendaftaran ke backend di sini
-    Alert.alert('Sukses', 'Akun berhasil dibuat!');
+    const auth = getAuth(app);
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      setSuccess('Akun berhasil dibuat!');
+      setTimeout(() => navigation.replace('SignIn'), 1500);
+    } catch (err) {
+      setError('Gagal membuat akun. Email mungkin sudah terdaftar.');
+    }
   };
 
   return (
@@ -111,6 +123,12 @@ const SignUp = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
+      {error ? (
+        <Text style={{ color: 'red', textAlign: 'center', marginBottom: 8 }}>{error}</Text>
+      ) : null}
+      {success ? (
+        <Text style={{ color: 'green', textAlign: 'center', marginBottom: 8 }}>{success}</Text>
+      ) : null}
       <TouchableOpacity
         style={styles.customButton}
         activeOpacity={0.7}

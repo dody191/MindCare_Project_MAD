@@ -14,14 +14,14 @@ const Tips = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backBtn}>
           <ArrowBack width={24} height={24} />
         </TouchableOpacity>
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           <Text style={styles.headerTitle}>Tips Kesehatan Mental</Text>
           <Text style={styles.headerSubtitle}>
             Kumpulan tips dan panduan untuk menjaga kesehatan mental Anda setiap hari.
           </Text>
         </View>
       </View>
-      <ScrollView contentContainerStyle={{paddingBottom: 24}}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 24 }}>
         {/* Card 1 */}
         <View style={styles.tipCard}>
           <View style={styles.tipHeader}>
