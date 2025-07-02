@@ -9,22 +9,17 @@ import IconLogout from '../../assets/Logout.png';
 const Dashboard = ({navigation}) => {
   return (
     <View style={styles.pageContainer}>
-      {/* Header Box */}
+      {/* Header */}
       <View style={styles.headerBox}>
         <View style={styles.header}>
           <View style={styles.headerLeft}>
             <Image source={MindCareLogo} style={styles.logo} />
             <Text style={styles.logoText}>MindCare</Text>
           </View>
-          <View style={styles.headerRight}>
-            <Text style={styles.headerText}>Selamat datang John!</Text>
-            <TouchableOpacity
-              style={styles.logoutBtn}
-              onPress={() => navigation.replace('SignIn')}>
-              <Image source={IconLogout} style={styles.logoutIconImg} />
-              <Text style={styles.logoutText}>Keluar</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity style={styles.logoutBtn} onPress={() => navigation.replace('SignIn')}>
+            <Image source={IconLogout} style={styles.logoutIconImg} />
+            <Text style={styles.logoutText}>Keluar</Text>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -32,12 +27,11 @@ const Dashboard = ({navigation}) => {
       <View style={styles.dashboardCard}>
         <Text style={styles.dashboardTitle}>Dashboard</Text>
         <Text style={styles.dashboardDesc}>
-          Selamat Datang di MindCare. Kesehatan Mental{"\n"}
-          Adalah Prioritas utama.
+          Selamat Datang di MindCare. Kesehatan Mental Adalah Prioritas utama.
         </Text>
       </View>
 
-      {/* Menu Cards */}
+      {/* Menu Card: Profil */}
       <View style={styles.menuCard}>
         <View style={styles.menuRow}>
           <View style={styles.menuIconWrapper}>
@@ -55,6 +49,7 @@ const Dashboard = ({navigation}) => {
         </View>
       </View>
 
+      {/* Menu Card: Tips */}
       <View style={styles.menuCard}>
         <View style={styles.menuRow}>
           <View style={styles.menuIconWrapper}>
@@ -72,6 +67,7 @@ const Dashboard = ({navigation}) => {
         </View>
       </View>
 
+      {/* Menu Card: Journaling */}
       <View style={styles.menuCard}>
         <View style={styles.menuRow}>
           <View style={styles.menuIconWrapper}>
@@ -98,57 +94,39 @@ const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
     backgroundColor: '#F7F9FD',
-    paddingHorizontal: 12,
-    paddingTop: 24,
+    paddingHorizontal: 0,
+    paddingTop: 0,
   },
   headerBox: {
-    width: 390,
-    height: 81,
+    width: '100%',
     backgroundColor: '#fff',
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 4, // Untuk Android
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0)',
-    marginBottom: 16,
-    alignSelf: 'center',
-    justifyContent: 'center',
+    borderBottomWidth: 2,
+    borderBottomColor: '#D9D9D9',
+    paddingTop: 16,
+    paddingBottom: 8,
+    marginBottom: 24,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    height: 81,
+    paddingHorizontal: 24,
   },
   headerLeft: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   logo: {
-    width: 36,
-    height: 36,
+    width: 48,
+    height: 48,
     resizeMode: 'contain',
     marginRight: 8,
   },
   logoText: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#5B6BF7',
     fontFamily: 'Poppins-Bold',
-  },
-  headerRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  headerText: {
-    fontSize: 14,
-    color: '#222',
-    fontFamily: 'Poppins-Regular',
-    marginRight: 8,
   },
   logoutBtn: {
     flexDirection: 'row',
@@ -167,28 +145,31 @@ const styles = StyleSheet.create({
   },
   dashboardCard: {
     backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 18,
-    marginBottom: 18,
+    borderRadius: 10,
+    padding: 14,
+    marginHorizontal: 8,
+    marginBottom: 20,
     borderWidth: 1,
     borderColor: '#D9D9D9',
   },
   dashboardTitle: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#000',
     fontFamily: 'Poppins-Bold',
     marginBottom: 4,
   },
   dashboardDesc: {
-    fontSize: 14,
-    color: '#8D92A3',
+    fontSize: 13,
+    color: '#6B6B6B',
     fontFamily: 'Poppins-Regular',
+    lineHeight: 18,
   },
   menuCard: {
     backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 16,
+    borderRadius: 10,
+    padding: 14,
+    marginHorizontal: 8,
     marginBottom: 18,
     borderWidth: 1,
     borderColor: '#D9D9D9',
@@ -199,27 +180,28 @@ const styles = StyleSheet.create({
   },
   menuIconWrapper: {
     backgroundColor: '#E8EDFF',
-    borderRadius: 8,
-    width: 56,
-    height: 56,
+    borderRadius: 6,
+    width: 40,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,
+    marginRight: 12,
   },
   menuIcon: {
-    width: 32,
-    height: 32,
+    width: 22,
+    height: 22,
     resizeMode: 'contain',
   },
   menuTitle: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: 'bold',
     color: '#000',
     fontFamily: 'Poppins-Bold',
+    marginBottom: 2,
   },
   menuDesc: {
-    fontSize: 14,
-    color: '#8D92A3',
+    fontSize: 12,
+    color: '#6B6B6B',
     fontFamily: 'Poppins-Regular',
     marginBottom: 8,
   },
@@ -227,15 +209,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#5B6BF7',
-    borderRadius: 6,
-    paddingVertical: 6,
+    borderRadius: 5,
+    paddingVertical: 5,
     paddingHorizontal: 18,
     alignSelf: 'flex-start',
   },
   menuButtonText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Poppins-Bold',
   },
 }); 

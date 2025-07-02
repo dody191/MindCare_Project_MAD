@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Modal} from 'react-native';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Modal, ActivityIndicator} from 'react-native';
 import Button from '../../components/atoms/Button';
 import MindCare from '../../assets/mindcare.png';
-import app from '../../config/firebase';
+import { app } from '../../config/firebase';
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 
 const EyeIcon = ({visible}: {visible: boolean}) => (
@@ -31,6 +31,9 @@ const SignIn = ({navigation}) => {
   const [error, setError] = useState('');
   const [resetError, setResetError] = useState('');
   const [resetSuccess, setResetSuccess] = useState('');
+  const [loadingSignIn, setLoadingSignIn] = useState(false);
+  const [loadingSignUp, setLoadingSignUp] = useState(false);
+  const [loadingReset, setLoadingReset] = useState(false);
 
   const handleSendReset = async () => {
     setResetError('');
@@ -40,14 +43,22 @@ const SignIn = ({navigation}) => {
       setResetError('Email harus diisi!');
       return;
     }
+    setLoadingReset(true);
     try {
       await sendPasswordResetEmail(auth, resetEmail);
       setModalVisible(false);
-      setResetSuccess('Link reset password berhasil dikirim ke email!');
-      setTimeout(() => setResetSuccess(''), 3000);
+      setResetSuccess('Link reset password berhasil dikirim ke email! Silakan cek inbox atau folder spam Gmail Anda.');
+      setTimeout(() => setResetSuccess(''), 5000);
     } catch (err) {
-      setResetError('Gagal mengirim email reset. Pastikan email benar.');
+      if (err.code === 'auth/user-not-found') {
+        setResetError('Email tidak ditemukan. Pastikan email sudah terdaftar.');
+      } else if (err.code === 'auth/invalid-email') {
+        setResetError('Format email tidak valid.');
+      } else {
+        setResetError('Gagal mengirim email reset. Pastikan email benar dan terdaftar.');
+      }
     }
+    setLoadingReset(false);
   };
 
   const handleResetPassword = () => {
@@ -58,6 +69,7 @@ const SignIn = ({navigation}) => {
 
   const handleSignIn = async () => {
     setError('');
+    setLoadingSignIn(true);
     const auth = getAuth(app);
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -65,6 +77,13 @@ const SignIn = ({navigation}) => {
     } catch (err) {
       setError('Email atau password salah!');
     }
+    setLoadingSignIn(false);
+  };
+
+  const handleSignUp = () => {
+    setLoadingSignUp(true);
+    navigation.navigate('SignUp');
+    setTimeout(() => setLoadingSignUp(false), 1000); // simulasi loading
   };
 
   return (
@@ -106,8 +125,14 @@ const SignIn = ({navigation}) => {
             <TouchableOpacity
               style={styles.customButton}
               activeOpacity={0.7}
-              onPress={handleSendReset}>
-              <Text style={styles.customButtonText}>Kirim Link Reset</Text>
+              onPress={handleSendReset}
+              disabled={loadingReset}
+            >
+              {loadingReset ? (
+                <ActivityIndicator size="small" color="#fff" />
+              ) : (
+                <Text style={styles.customButtonText}>Kirim Link Reset</Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>
@@ -218,16 +243,37 @@ const SignIn = ({navigation}) => {
       {error ? (
         <Text style={{ color: 'red', textAlign: 'center', marginBottom: 8 }}>{error}</Text>
       ) : null}
+      {loadingSignIn && (
+        <View style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.3)',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 100,
+        }}>
+          <ActivityIndicator size="large" color="#535BE9" />
+        </View>
+      )}
       <TouchableOpacity
         style={styles.customButton}
         activeOpacity={0.7}
-        onPress={handleSignIn}>
+        onPress={handleSignIn}
+        disabled={loadingSignIn}
+      >
         <Text style={styles.customButtonText}>Masuk</Text>
       </TouchableOpacity>
       <View style={styles.signupWrapper}>
         <Text style={styles.signupText}>Belum punya akun? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-          <Text style={styles.signupLink}>Daftar sekarang</Text>
+        <TouchableOpacity onPress={handleSignUp} disabled={loadingSignUp}>
+          {loadingSignUp ? (
+            <ActivityIndicator size="small" color="#535BE9" />
+          ) : (
+            <Text style={styles.signupLink}>Daftar sekarang</Text>
+          )}
         </TouchableOpacity>
       </View>
     </View>
