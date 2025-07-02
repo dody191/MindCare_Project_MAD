@@ -12,6 +12,8 @@ import MindCare from '../../assets/mindcare.png';
 import ArrowBack from '../../assets/arrow-back.svg';
 import app from '../../config/firebase';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../../config/firebase';
 
 const EyeIcon = ({visible}: {visible: boolean}) => (
   <Image
@@ -47,11 +49,22 @@ const SignUp = ({navigation}) => {
     }
     const auth = getAuth(app);
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log('UID user baru:', userCredential.user.uid);
+      // Simpan data ke Firestore
+      await setDoc(doc(db, 'users', userCredential.user.uid), {
+        name,
+        email,
+        birth: '',
+        phone: '',
+        address: '',
+        photoURL: '',
+      });
       setSuccess('Akun berhasil dibuat!');
-      setTimeout(() => navigation.replace('SignIn'), 1500);
+      setTimeout(() => navigation.replace('SignIn'), 1000);
     } catch (err) {
-      setError('Gagal membuat akun. Email mungkin sudah terdaftar.');
+      console.log('ERROR SIGNUP/FIRESTORE:', err);
+      setError('Gagal membuat akun atau menyimpan data. Email mungkin sudah terdaftar.');
     }
   };
 

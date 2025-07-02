@@ -1,17 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {StyleSheet,View,Text,Image,TouchableOpacity,ScrollView,} from 'react-native';
 import ArrowBack from '../../assets/arrow-back.svg';
 import MindCareLogo from '../../assets/mindcare.png';
 import PlusMath from '../../assets/PlusMath.png';
 import IconCalendar from '../../assets/iconcalendar.png';
+import { db } from '../../config/firebase';
+import { collection, getDocs, query, orderBy, deleteDoc, doc } from 'firebase/firestore';
 
 const Journal1 = ({navigation}) => {
+  const [journals, setJournals] = useState<any[]>([]);
+  useEffect(() => {
+    const fetchJournals = async () => {
+      try {
+        const q = query(collection(db, 'journals'), orderBy('createdAt', 'desc'));
+        const querySnapshot = await getDocs(q);
+        const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setJournals(data);
+      } catch (error) {
+        // Handle error if needed
+      }
+    };
+    fetchJournals();
+  }, []);
+
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteDoc(doc(db, 'journals', id));
+      setJournals(journals => journals.filter(j => j.id !== id));
+    } catch (error) {
+      // Optional: tampilkan alert jika gagal
+    }
+  };
+
   return (
     <View style={styles.pageContainer}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.navigate('Dashboard')}
           style={styles.backBtn}>
           <ArrowBack width={24} height={24} />
         </TouchableOpacity>
@@ -37,41 +63,28 @@ const Journal1 = ({navigation}) => {
           </Text>
         </View>
 
-        {/* Journal Card 1 */}
-        <View style={styles.journalCard}>
-          <View style={styles.journalHeader}>
-            <Text style={styles.journalTitle}>Hari yang Produktif</Text>
-            <View style={styles.journalBadge}>
-              <Text style={styles.badgeText}>Bahagia</Text>
+        {journals.map(journal => (
+          <View style={styles.journalCard} key={journal.id}>
+            <View style={styles.journalHeader}>
+              <Text style={styles.journalTitle}>{journal.title}</Text>
+              <View style={styles.journalBadge}>
+                <Text style={styles.badgeText}>{journal.feeling}</Text>
+              </View>
+              <View style={styles.journalDateWrap}>
+                <Image source={IconCalendar} style={styles.journalDateIcon} />
+                <Text style={styles.journalDate}>
+                  {journal.createdAt && journal.createdAt.seconds ?
+                    new Date(journal.createdAt.seconds * 1000).toLocaleDateString('id-ID') :
+                    ''}
+                </Text>
+              </View>
             </View>
-            <View style={styles.journalDateWrap}>
-              <Image source={IconCalendar} style={styles.journalDateIcon} />
-              <Text style={styles.journalDate}>15/1/2024</Text>
-            </View>
+            <Text style={styles.journalDesc}>{journal.content}</Text>
+            <TouchableOpacity onPress={() => handleDelete(journal.id)} style={{marginTop: 8, alignSelf: 'flex-end', backgroundColor: '#FF5A5F', paddingHorizontal: 12, paddingVertical: 4, borderRadius: 6}}>
+              <Text style={{color: '#fff', fontWeight: 'bold'}}>Hapus</Text>
+            </TouchableOpacity>
           </View>
-          <Text style={styles.journalDesc}>
-            Hari ini saya berhasil menyelesaikan beberapa tugas penting. Merasa
-            grateful dengan pencapaian hari ini.
-          </Text>
-        </View>
-
-        {/* Journal Card 2 */}
-        <View style={styles.journalCard}>
-          <View style={styles.journalHeader}>
-            <Text style={styles.journalTitle}>Refleksi Minggu Ini</Text>
-            <View style={styles.journalBadge}>
-              <Text style={styles.badgeText}>Tenang</Text>
-            </View>
-            <View style={styles.journalDateWrap}>
-              <Image source={IconCalendar} style={styles.journalDateIcon} />
-              <Text style={styles.journalDate}>17/1/2024</Text>
-            </View>
-          </View>
-          <Text style={styles.journalDesc}>
-            Minggu ini cukup menantang, tapi saya belajar banyak hal baru
-            tentang diri saya.
-          </Text>
-        </View>
+        ))}
       </ScrollView>
     </View>
   );

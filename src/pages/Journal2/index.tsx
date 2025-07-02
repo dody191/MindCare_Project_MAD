@@ -3,6 +3,8 @@ import {StyleSheet,View,Text,Image,TouchableOpacity,TextInput,ScrollView,Alert,M
 import MindCareLogo from '../../assets/mindcare.png';
 import ArrowBack from '../../assets/arrow-back.svg';
 import EditJournal from '../../assets/editjournal.png';
+import { db } from '../../config/firebase';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 const feelingsList = ['Senang','Sedih','Marah','Takut','Cemas','Bersyukur',];
 
@@ -12,16 +14,25 @@ const Journal2 = ({navigation}) => {
   const [content, setContent] = useState('');
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!title || !feeling || !content) {
       Alert.alert('Error', 'Semua field harus diisi.');
       return;
     }
-    Alert.alert('Sukses', 'Jurnal berhasil disimpan!');
-    // Reset form jika perlu
-    setTitle('');
-    setFeeling('');
-    setContent('');
+    try {
+      await addDoc(collection(db, 'journals'), {
+        title,
+        feeling,
+        content,
+        createdAt: Timestamp.now(),
+      });
+      setTitle('');
+      setFeeling('');
+      setContent('');
+      navigation.navigate('Journal1');
+    } catch (error) {
+      Alert.alert('Error', 'Gagal menyimpan jurnal.');
+    }
   };
 
   const handleCancel = () => {
